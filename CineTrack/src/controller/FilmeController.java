@@ -15,6 +15,11 @@ public class FilmeController {
 
     public Filme buscarPorId(int id) {
         return new Filme().buscarPorId(id);
+
+    }
+
+    public Filme buscarPorTitulo(String titulo) {
+        return new Filme().buscarPorTitulo(titulo);
     }
 
     public ArrayList<Filme> listar() {

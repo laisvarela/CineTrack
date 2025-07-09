@@ -75,6 +75,10 @@ public class Filme {
         return new FilmeDAO().buscarPorId(id);
     }
 
+    public Filme buscarPorTitulo(String titulo) {
+        return new FilmeDAO().buscarPorTitulo(titulo);
+    }
+
     public ArrayList<Filme> listar() {
         return new FilmeDAO().listar();
     }

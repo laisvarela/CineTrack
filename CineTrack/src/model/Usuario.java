@@ -96,4 +96,7 @@ public class Usuario {
     public void remover(int id) {
         new UsuarioDAO().remover(id);
     }
+    public Usuario login(String username, String senha) {
+        return new UsuarioDAO().login(username, senha);
+    }
 }

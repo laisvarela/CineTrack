@@ -108,6 +108,29 @@ public class FilmeDAO {
         }
     }
 
+    public Filme buscarPorTitulo(String titulo) {
+        String sql = "SELECT * FROM filmes WHERE titulo = ?";
+        try {
+            conn = ConexaoDAO.ConectorBD();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, titulo);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Filme(
+                        rs.getInt("id"),
+                        rs.getString("titulo"),
+                        rs.getString("genero"),
+                        rs.getString("diretor"),
+                        rs.getInt("ano"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar filme por título: " + e);
+        } finally {
+            fechar();
+        }
+        return null;
+    }
+
     private void fechar() {
         try {
             if (stmt != null)
