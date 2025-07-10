@@ -3,6 +3,8 @@ package controller;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import model.Usuario;
 
@@ -62,4 +64,6 @@ public class UsuarioController {
     public void remover(int id) {
         new Usuario().remover(id);
     }
+
+  
 }
