@@ -54,6 +54,7 @@ public class UsuarioDAO {
                 stmt.setNull(5, java.sql.Types.INTEGER);
             }
             stmt.executeUpdate();
+            System.out.println("Usuário cadastrado com sucesso!");
         } catch (SQLException e) {
             System.out.println("Erro ao cadastrar usuário: " + e);
         } finally {
@@ -77,6 +78,7 @@ public class UsuarioDAO {
             }
             stmt.setInt(6, id);
             stmt.executeUpdate();
+            System.out.println("Usuário editado com sucesso!");
         } catch (SQLException e) {
             System.out.println("Erro ao editar usuário: " + e);
         } finally {

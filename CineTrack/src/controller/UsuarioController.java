@@ -86,6 +86,7 @@ public class UsuarioController {
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário encontrado: " + usuario.getNome(), "Sucesso",
                         JOptionPane.INFORMATION_MESSAGE);
+                System.out.println("Usuário encontrado: "+usuario.getNome());
                 return usuario;
             }
         }
