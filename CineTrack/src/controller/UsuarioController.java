@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+
 import model.Usuario;
 
 public class UsuarioController {
@@ -139,4 +140,6 @@ public class UsuarioController {
             }
         }
     }
+
+  
 }
