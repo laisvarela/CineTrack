@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
-import javax.swing.JOptionPane;
-import model.Usuario;
-import model.*;
 import controller.*;
+import model.Usuario;
 
 /**
  *
@@ -16,7 +10,7 @@ import controller.*;
 public class TelaLogin extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaLogin.class.getName());
-
+    public static int idLogado;
     /**
      * Creates new form TelaLogin
      */
@@ -263,7 +257,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         UsuarioController usuarioController = new UsuarioController();
         int codigo = 0;
-        if(txtCodigo.getText().isEmpty()){
+        if (txtCodigo.getText().isEmpty()) {
             codigo = 0;
         }
         Usuario usuario = usuarioController.login(txtUsername.getText(), txtSenha.getPassword(), codigo);

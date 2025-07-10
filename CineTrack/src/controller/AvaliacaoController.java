@@ -30,11 +30,9 @@ public class AvaliacaoController {
         if (nova.getNota() < 1 || nova.getNota() > 10 || nova.getComentario().isBlank()) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos corretamente.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
-            return;
         } else if (new Avaliacao().buscar(usuarioId, filmeId) == null) {
             JOptionPane.showMessageDialog(null, "Avaliação não encontrada.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
-            return;
         } else if (nova != null) {
             new Avaliacao().editar(usuarioId, filmeId, nova);
             JOptionPane.showMessageDialog(null, "Avaliação editada com sucesso!", "Sucesso",
@@ -74,11 +72,9 @@ public class AvaliacaoController {
         if (usuarioId <= 0 || filmeId <= 0) {
             JOptionPane.showMessageDialog(null, "ID de usuário ou filme inválido.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
-            return;
         } else if (new Avaliacao().buscar(usuarioId, filmeId) == null) {
             JOptionPane.showMessageDialog(null, "Avaliação não encontrada.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
-            return;
 
         } else {
             new Avaliacao().remover(usuarioId, filmeId);

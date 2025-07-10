@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import model.Usuario;
+import view.TelaLogin;
 
 public class UsuarioController {
 
@@ -23,6 +24,7 @@ public class UsuarioController {
                 } else {
                     JOptionPane.showMessageDialog(null, "Bem-vindo, usuário " + usuario.getNome() + "!",
                             "Login bem-sucedido", JOptionPane.INFORMATION_MESSAGE);
+                    TelaLogin.idLogado = usuario.getId();
                     return null;
                 }
             } else {

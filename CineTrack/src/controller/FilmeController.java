@@ -18,7 +18,6 @@ public class FilmeController {
         } else if (new Filme().buscarPorTitulo(f.getTitulo()) != null) {
             JOptionPane.showMessageDialog(null, "Já existe um filme com esse título.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
-            return;
 
         } else if (f != null) {
             new Filme().cadastrar(f);
@@ -30,22 +29,18 @@ public class FilmeController {
         if (f.getTitulo().isBlank() || f.getGenero().isBlank() || f.getDiretor().isBlank() || f.getAno() <= 0) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
-            return;
         } else if (f.getAno() < 1888 || f.getAno() > java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)) {
             JOptionPane.showMessageDialog(null, "O ano do filme deve ser válido.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
-            return;
 
         } else if (new Filme().buscarPorTitulo(f.getTitulo()) != null
                 && new Filme().buscarPorTitulo(f.getTitulo()).getId() != id) {
             JOptionPane.showMessageDialog(null, "Já existe um filme com esse título.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
-            return;
 
         } else if (new Filme().buscarPorId(id) == null) {
             JOptionPane.showMessageDialog(null, "Filme não encontrado.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
-            return;
         } else if (f != null) {
             new Filme().editar(id, f);
             JOptionPane.showMessageDialog(null, "Filme editado com sucesso!", "Sucesso",
@@ -109,11 +104,9 @@ public class FilmeController {
     public void remover(int id) {
         if (id <= 0) {
             JOptionPane.showMessageDialog(null, "ID inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
         } else if (new Filme().buscarPorId(id) == null) {
             JOptionPane.showMessageDialog(null, "Filme não encontrado.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
-            return;
         } else {
             new Filme().remover(id);
             JOptionPane.showMessageDialog(null, "Filme removido com sucesso!", "Sucesso",
