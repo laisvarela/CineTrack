@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import model.Usuario;
 
 public class UsuarioDAO {
+
     private Connection conn = null;
     private PreparedStatement stmt;
     private ResultSet rs;
@@ -24,7 +25,6 @@ public class UsuarioDAO {
 
             if (rs.next()) {
                 return new Usuario(
-                        rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getString("username"),
                         rs.getString("senha"),
@@ -39,7 +39,7 @@ public class UsuarioDAO {
         return null;
     }
 
-    public void cadastrar(Usuario u) {
+    public boolean cadastrar(Usuario u) {
         String sql = "INSERT INTO usuarios (nome, username, senha, perfil, codigo) VALUES (?, ?, ?, ?, ?)";
         try {
             conn = ConexaoDAO.ConectorBD();
@@ -54,12 +54,14 @@ public class UsuarioDAO {
                 stmt.setNull(5, java.sql.Types.INTEGER);
             }
             stmt.executeUpdate();
-            System.out.println("Usuário cadastrado com sucesso!");
+            return true;
         } catch (SQLException e) {
             System.out.println("Erro ao cadastrar usuário: " + e);
+            return false;
         } finally {
             fechar();
         }
+
     }
 
     public void editar(int id, Usuario u) {
@@ -95,7 +97,6 @@ public class UsuarioDAO {
             rs = stmt.executeQuery();
             if (rs.next()) {
                 return new Usuario(
-                        rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getString("username"),
                         rs.getString("senha"),
@@ -119,7 +120,6 @@ public class UsuarioDAO {
             rs = stmt.executeQuery();
             if (rs.next()) {
                 return new Usuario(
-                        rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getString("username"),
                         rs.getString("senha"),
@@ -143,7 +143,6 @@ public class UsuarioDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 lista.add(new Usuario(
-                        rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getString("username"),
                         rs.getString("senha"),
@@ -174,14 +173,16 @@ public class UsuarioDAO {
 
     private void fechar() {
         try {
-            if (stmt != null)
+            if (stmt != null) {
                 stmt.close();
+            }
         } catch (SQLException e) {
             System.out.println("Erro ao fechar PreparedStatement: " + e);
         }
         try {
-            if (conn != null)
+            if (conn != null) {
                 conn.close();
+            }
         } catch (SQLException e) {
             System.out.println("Erro ao fechar conexão: " + e);
         }
