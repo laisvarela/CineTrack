@@ -314,10 +314,10 @@ public class TelaLogin extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form *//*
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new TelaLogin().setVisible(true));
     }
-*/
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adm_btn;
     private javax.swing.JButton btnCadastrar;
