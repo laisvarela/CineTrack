@@ -166,13 +166,13 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        if(txtUsername.getText().equalsIgnoreCase(usuario.getNome())&& txtSenha.getPassword().equals(usuario.getSenha())){
+        if(txtUsername.getText().equalsIgnoreCase(usuario.getNome())&& new String(txtSenha.getPassword()).equals(usuario.getSenha())){
         UsuarioController validaLogin = new UsuarioController();
         validaLogin.login(txtUsername.getText(), txtSenha.getText());
         JOptionPane.showMessageDialog(null, "Bem-vindo "+usuario.getNome());
         }
         else{
-           JOptionPane.showMessageDialog(null, "Acesso negado"); }
+           JOptionPane.showMessageDialog(null, "Usuários ou senhas inválidos"); }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
