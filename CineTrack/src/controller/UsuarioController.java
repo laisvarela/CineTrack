@@ -46,19 +46,16 @@ public class UsuarioController {
             JOptionPane.showMessageDialog(null, "Já existe um usuário com esse nome de usuário.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
 
-        } else if (u.getPerfil().equalsIgnoreCase("admin") && u.getCodigo() != 1234) {
+        } else if (u.getPerfil().equalsIgnoreCase("admin") && u.getCodigoInformado() < u.getCodigo()
+                || u.getCodigoInformado() > u.getCodigo()) {
             JOptionPane.showMessageDialog(null, "O código do administrador deve ser preenchido.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
         } else {
-            boolean usuario = new Usuario().cadastrar(u);
-            if (usuario) {
+            if (u != null) {
+                new Usuario().cadastrar(u);
                 JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucesso",
                         JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário.", "Erro",
-                        JOptionPane.ERROR_MESSAGE);
             }
-
         }
     }
 
@@ -69,7 +66,8 @@ public class UsuarioController {
         } else if (u.getSenha().length() < 4) {
             JOptionPane.showMessageDialog(null, "A senha deve ter pelo menos 4 caracteres.", "Atenção",
                     JOptionPane.WARNING_MESSAGE);
-        } else if (u.getPerfil().equalsIgnoreCase("admin") && u.getCodigoInformado() < u.getCodigo() || u.getCodigoInformado() > u.getCodigo()) {
+        } else if (u.getPerfil().equalsIgnoreCase("admin") && u.getCodigoInformado() < u.getCodigo()
+                || u.getCodigoInformado() > u.getCodigo()) {
             JOptionPane.showMessageDialog(null, "Código de admin inválido!.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
         } else if (new Usuario().buscarPorUsername(u.getUsername()) != null
@@ -97,7 +95,7 @@ public class UsuarioController {
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário encontrado: " + usuario.getNome(), "Sucesso",
                         JOptionPane.INFORMATION_MESSAGE);
-                System.out.println("Usuário encontrado: "+usuario.getNome());
+                System.out.println("Usuário encontrado: " + usuario.getNome());
                 return usuario;
             }
         }

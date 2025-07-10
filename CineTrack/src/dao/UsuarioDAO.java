@@ -39,7 +39,7 @@ public class UsuarioDAO {
         return null;
     }
 
-    public boolean cadastrar(Usuario u) {
+    public void cadastrar(Usuario u) {
         String sql = "INSERT INTO usuarios (nome, username, senha, perfil, codigo) VALUES (?, ?, ?, ?, ?)";
         try {
             conn = ConexaoDAO.ConectorBD();
@@ -54,10 +54,8 @@ public class UsuarioDAO {
                 stmt.setNull(5, java.sql.Types.INTEGER);
             }
             stmt.executeUpdate();
-            return true;
         } catch (SQLException e) {
             System.out.println("Erro ao cadastrar usuário: " + e);
-            return false;
         } finally {
             fechar();
         }

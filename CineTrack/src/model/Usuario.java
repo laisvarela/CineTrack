@@ -34,8 +34,7 @@ public class Usuario {
     public void setCodigoInformado(Integer codigoInformado) {
         this.codigoInformado = codigoInformado;
     }
-    
-    
+
     public int getId() {
         return id;
     }
@@ -80,8 +79,8 @@ public class Usuario {
         return codigo;
     }
 
-    public boolean cadastrar(Usuario u) {
-        return new UsuarioDAO().cadastrar(u);
+    public void cadastrar(Usuario u) {
+        new UsuarioDAO().cadastrar(u);
     }
 
     public void editar(int id, Usuario u) {
