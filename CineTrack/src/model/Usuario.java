@@ -25,12 +25,6 @@ public class Usuario {
         this.codigoInformado = codigoInformado;
     }
 
-    public Usuario(String username, String senha, String perfil) {
-        this.username = username;
-        this.senha = senha;
-        this.perfil = perfil;
-    }
-
     // Getters e Setters
 
     public Integer getCodigoInformado() {

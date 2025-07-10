@@ -7,7 +7,7 @@ import model.Usuario;
 
 public class UsuarioController {
 
-    public Usuario login(String username, char[] senha) {
+    public Usuario login(String username, char[] senha, Integer codigo) {
         if (username.isBlank() || senha.length == 0) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro",
                     JOptionPane.ERROR_MESSAGE);

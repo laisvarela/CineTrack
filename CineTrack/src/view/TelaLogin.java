@@ -262,7 +262,11 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         UsuarioController usuarioController = new UsuarioController();
-        Usuario usuario = usuarioController.login(txtUsername.getText(), txtSenha.getPassword());
+        int codigo = 0;
+        if(txtCodigo.getText().isEmpty()){
+            codigo = 0;
+        }
+        Usuario usuario = usuarioController.login(txtUsername.getText(), txtSenha.getPassword(), codigo);
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void cliente_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cliente_btnActionPerformed
