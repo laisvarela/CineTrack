@@ -9,13 +9,12 @@ import model.Usuario;
 import model.*;
 import controller.*;
 
-
 /**
  *
  * @author Jao
  */
 public class TelaLogin extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaLogin.class.getName());
 
     /**
@@ -58,20 +57,17 @@ public class TelaLogin extends javax.swing.JFrame {
 
         chckBoxUsuario.setBackground(new java.awt.Color(255, 255, 255));
         chckBoxUsuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        chckBoxUsuario.setForeground(new java.awt.Color(0, 0, 0));
         chckBoxUsuario.setText("Usuário");
         chckBoxUsuario.setToolTipText("");
 
         checkBoxAdmin.setBackground(new java.awt.Color(255, 255, 255));
         checkBoxAdmin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        checkBoxAdmin.setForeground(new java.awt.Color(0, 0, 0));
         checkBoxAdmin.setText("Administrador");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(66, 141, 255));
         jLabel1.setText("Login");
 
-        txtUsername.setBackground(new java.awt.Color(255, 255, 255));
         txtUsername.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtUsername.setForeground(new java.awt.Color(51, 51, 51));
 
@@ -83,21 +79,20 @@ public class TelaLogin extends javax.swing.JFrame {
         btnEntrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEntrar.setForeground(new java.awt.Color(66, 141, 255));
         btnEntrar.setText("Entrar");
-        btnEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntrarActionPerformed(evt);
             }
         });
 
-        txtSenha.setBackground(new java.awt.Color(255, 255, 255));
         txtSenha.setForeground(new java.awt.Color(51, 51, 51));
 
         btnCadastrar.setForeground(new java.awt.Color(51, 102, 255));
         btnCadastrar.setText("Não tem conta? Registre-se");
         btnCadastrar.setBorder(null);
         btnCadastrar.setContentAreaFilled(false);
-        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -111,49 +106,54 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(chckBoxUsuario)
-                                    .addComponent(checkBoxAdmin))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnEntrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(140, 140, 140)
+                .addComponent(jLabel2))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(checkBoxAdmin)
+                .addGap(53, 53, 53)
+                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(chckBoxUsuario)
+                .addGap(85, 85, 85)
+                .addComponent(btnCadastrar))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
+                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEntrar)
-                    .addComponent(checkBoxAdmin))
+                .addGap(6, 6, 6)
+                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(checkBoxAdmin))
+                    .addComponent(btnEntrar))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastrar)
-                    .addComponent(chckBoxUsuario))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chckBoxUsuario)
+                    .addComponent(btnCadastrar)))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 300));
@@ -162,28 +162,27 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        
+
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        if(txtUsername.getText().equalsIgnoreCase(usuario.getNome())&& new String(txtSenha.getPassword()).equals(usuario.getSenha())){
-        UsuarioController validaLogin = new UsuarioController();
-        validaLogin.login(txtUsername.getText(), txtSenha.getText());
-        JOptionPane.showMessageDialog(null, "Bem-vindo "+usuario.getNome());
-        }
-        else{
-           JOptionPane.showMessageDialog(null, "Usuários ou senhas inválidos"); }
+        UsuarioController usuarioController = new UsuarioController();
+        Usuario usuario = usuarioController.login(txtUsername.getText(), txtSenha.getPassword());
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+    public static void main(String args[]) {/*
+        Usuario usuario = new Usuario("teste", "teste", "123456", "cliente", 0);
+        UsuarioController user = new UsuarioController();
+        user.cadastrar(usuario);*/
+ /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -212,6 +211,5 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
-    Usuario usuario = new Usuario();
-    
+
 }

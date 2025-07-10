@@ -5,26 +5,43 @@ import java.util.ArrayList;
 import dao.UsuarioDAO;
 
 public class Usuario {
+
     private int id;
     private String nome;
     private String username;
     private String senha;
     private String perfil; // "admin" ou "cliente"
-    private Integer codigo; // apenas se for admin (pode ser null para clientes)
+    private final Integer codigo = 1234;
+    private Integer codigoInformado;// apenas se for admin (pode ser null para clientes)
 
     public Usuario() {
     }
 
-    public Usuario(int id, String nome, String username, String senha, String perfil, Integer codigo) {
-        this.id = id;
+    public Usuario(String nome, String username, String senha, String perfil, Integer codigoInformado) {
         this.nome = nome;
         this.username = username;
         this.senha = senha;
         this.perfil = perfil;
-        this.codigo = codigo;
+        this.codigoInformado = codigoInformado;
+    }
+
+    public Usuario(String username, String senha, String perfil) {
+        this.username = username;
+        this.senha = senha;
+        this.perfil = perfil;
     }
 
     // Getters e Setters
+
+    public Integer getCodigoInformado() {
+        return codigoInformado;
+    }
+
+    public void setCodigoInformado(Integer codigoInformado) {
+        this.codigoInformado = codigoInformado;
+    }
+    
+    
     public int getId() {
         return id;
     }
@@ -69,12 +86,8 @@ public class Usuario {
         return codigo;
     }
 
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
-    }
-
-    public void cadastrar(Usuario u) {
-        new UsuarioDAO().cadastrar(u);
+    public boolean cadastrar(Usuario u) {
+        return new UsuarioDAO().cadastrar(u);
     }
 
     public void editar(int id, Usuario u) {
@@ -96,6 +109,7 @@ public class Usuario {
     public void remover(int id) {
         new UsuarioDAO().remover(id);
     }
+
     public Usuario login(String username, String senha) {
         return new UsuarioDAO().login(username, senha);
     }
