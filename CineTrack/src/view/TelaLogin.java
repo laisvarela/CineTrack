@@ -7,15 +7,16 @@ import model.Usuario;
  *
  * @author Jao
  */
-public class TelaLogin extends javax.swing.JFrame {
+public class TelaLogin extends javax.swing.JInternalFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaLogin.class.getName());
     public static int idLogado;
     /**
      * Creates new form TelaLogin
      */
-    public TelaLogin() {
+    public TelaLogin(javax.swing.JDesktopPane desktopPane) {
         initComponents();
+        this.desktopPane = desktopPane;
         codigo_label.setVisible(false);
         txtCodigo.setVisible(false);
         escolha_Panel.setVisible(true);
@@ -62,6 +63,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(66, 141, 255));
         jLabel1.setText("Login");
 
+        txtUsername.setBackground(new java.awt.Color(255, 255, 255));
         txtUsername.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtUsername.setForeground(new java.awt.Color(51, 51, 51));
 
@@ -69,10 +71,11 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(66, 141, 255));
         jLabel3.setText("Senha");
 
-        btnEntrar.setBackground(new java.awt.Color(164, 194, 247));
+        btnEntrar.setBackground(new java.awt.Color(33, 150, 243));
         btnEntrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnEntrar.setForeground(new java.awt.Color(66, 141, 255));
+        btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
         btnEntrar.setText("Entrar");
+        btnEntrar.setBorderPainted(false);
         btnEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,13 +83,14 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
 
+        txtSenha.setBackground(new java.awt.Color(255, 255, 255));
         txtSenha.setForeground(new java.awt.Color(51, 51, 51));
 
         btnCadastrar.setForeground(new java.awt.Color(51, 102, 255));
         btnCadastrar.setText("Não tem conta? Registre-se");
         btnCadastrar.setBorder(null);
         btnCadastrar.setContentAreaFilled(false);
-        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -99,6 +103,7 @@ public class TelaLogin extends javax.swing.JFrame {
         codigo_label.setForeground(new java.awt.Color(66, 141, 255));
         codigo_label.setText("Código");
 
+        txtCodigo.setBackground(new java.awt.Color(255, 255, 255));
         txtCodigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtCodigo.setForeground(new java.awt.Color(51, 51, 51));
 
@@ -106,7 +111,7 @@ public class TelaLogin extends javax.swing.JFrame {
         voltar_btn.setText("<< Voltar");
         voltar_btn.setBorder(null);
         voltar_btn.setContentAreaFilled(false);
-        voltar_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        voltar_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         voltar_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 voltar_btnActionPerformed(evt);
@@ -174,20 +179,24 @@ public class TelaLogin extends javax.swing.JFrame {
         escolha_Panel.setBackground(new java.awt.Color(255, 255, 255));
         escolha_Panel.setForeground(new java.awt.Color(255, 255, 255));
 
-        cliente_btn.setBackground(new java.awt.Color(245, 255, 255));
+        cliente_btn.setBackground(new java.awt.Color(33, 150, 243));
         cliente_btn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        cliente_btn.setForeground(new java.awt.Color(66, 141, 255));
+        cliente_btn.setForeground(new java.awt.Color(255, 255, 255));
         cliente_btn.setText("Cliente");
+        cliente_btn.setBorderPainted(false);
+        cliente_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cliente_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cliente_btnActionPerformed(evt);
             }
         });
 
-        adm_btn.setBackground(new java.awt.Color(245, 255, 255));
+        adm_btn.setBackground(new java.awt.Color(33, 150, 243));
         adm_btn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        adm_btn.setForeground(new java.awt.Color(66, 141, 255));
+        adm_btn.setForeground(new java.awt.Color(255, 255, 255));
         adm_btn.setText("Administrador");
+        adm_btn.setBorderPainted(false);
+        adm_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         adm_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 adm_btnActionPerformed(evt);
@@ -212,7 +221,7 @@ public class TelaLogin extends javax.swing.JFrame {
                         .addComponent(cliente_btn)
                         .addGap(18, 18, 18)
                         .addComponent(adm_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         escolha_PanelLayout.setVerticalGroup(
             escolha_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,22 +232,24 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGroup(escolha_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cliente_btn)
                     .addComponent(adm_btn))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(login_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(escolha_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(login_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(escolha_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(login_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(escolha_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(escolha_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -251,7 +262,11 @@ public class TelaLogin extends javax.swing.JFrame {
         this.pack();
     }
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        TelaCadastroUsuario telaCadastro = new TelaCadastroUsuario();
 
+        this.desktopPane.add(telaCadastro);
+
+        telaCadastro.setVisible(true);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
@@ -286,31 +301,6 @@ public class TelaLogin extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {/*
-        Usuario usuario = new Usuario("teste", "teste", "123456", "cliente", 0);
-        UsuarioController user = new UsuarioController();
-        user.cadastrar(usuario);*/
- /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaLogin().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adm_btn;
@@ -329,5 +319,5 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsername;
     private javax.swing.JButton voltar_btn;
     // End of variables declaration//GEN-END:variables
-
+    private javax.swing.JDesktopPane desktopPane;
 }
