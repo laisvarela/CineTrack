@@ -13,15 +13,16 @@ import controller.*;
  *
  * @author Jao
  */
-public class TelaLogin extends javax.swing.JFrame {
+public class TelaLogin extends javax.swing.JInternalFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaLogin.class.getName());
 
     /**
      * Creates new form TelaLogin
      */
-    public TelaLogin() {
+    public TelaLogin(javax.swing.JDesktopPane desktopPane) {
         initComponents();
+        this.desktopPane = desktopPane;
         codigo_label.setVisible(false);
         txtCodigo.setVisible(false);
         escolha_Panel.setVisible(true);
@@ -267,13 +268,17 @@ public class TelaLogin extends javax.swing.JFrame {
         this.pack();
     }
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        TelaCadastroUsuario telaCadastro = new TelaCadastroUsuario();
 
+        this.desktopPane.add(telaCadastro);
+
+        telaCadastro.setVisible(true);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         UsuarioController usuarioController = new UsuarioController();
         int codigo = 0;
-        if(txtCodigo.getText().isEmpty()){
+        if (txtCodigo.getText().isEmpty()) {
             codigo = 0;
         }
         Usuario usuario = usuarioController.login(txtUsername.getText(), txtSenha.getPassword(), codigo);
@@ -302,31 +307,6 @@ public class TelaLogin extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {/*
-        Usuario usuario = new Usuario("teste", "teste", "123456", "cliente", 0);
-        UsuarioController user = new UsuarioController();
-        user.cadastrar(usuario);*/
- /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaLogin().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adm_btn;
@@ -345,5 +325,5 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsername;
     private javax.swing.JButton voltar_btn;
     // End of variables declaration//GEN-END:variables
-
+    private javax.swing.JDesktopPane desktopPane;
 }
