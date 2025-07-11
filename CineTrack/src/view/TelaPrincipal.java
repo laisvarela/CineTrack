@@ -6,6 +6,7 @@ package view;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import model.Usuario;
 
 
 /**
@@ -20,6 +21,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        menuCadastros.setVisible(false);
+        menuSistema.setVisible(false);
+        menuConta.setVisible(false);
+        menuAvaliacoes.setVisible(false);
 
     }
 
@@ -35,9 +40,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         desktopPane = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
-        menuBar = new javax.swing.JMenuBar();
-        helpMenu = new javax.swing.JMenu();
-        contentRelatorio = new javax.swing.JMenuItem();
+        menuLogado = new javax.swing.JMenuBar();
+        menuCadastros = new javax.swing.JMenu();
+        menuItemClientes = new javax.swing.JMenuItem();
+        menutItemFilmes = new javax.swing.JMenuItem();
+        menuAvaliacoes = new javax.swing.JMenu();
+        menuItemMinhasAvaliacoes = new javax.swing.JMenuItem();
+        menuSistema = new javax.swing.JMenu();
+        menuItemRelatorio = new javax.swing.JMenuItem();
+        menuConta = new javax.swing.JMenu();
+        menuItemEditarConta = new javax.swing.JMenuItem();
+        menuItemLogout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -70,31 +83,44 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         getContentPane().add(desktopPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 400));
 
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Sobre");
+        menuCadastros.setText("Cadastros");
 
-        contentRelatorio.setMnemonic('c');
-        contentRelatorio.setText("Relatório");
-        contentRelatorio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contentRelatorioActionPerformed(evt);
-            }
-        });
-        helpMenu.add(contentRelatorio);
+        menuItemClientes.setText("Clientes");
+        menuCadastros.add(menuItemClientes);
 
-        menuBar.add(helpMenu);
+        menutItemFilmes.setText("Filmes");
+        menuCadastros.add(menutItemFilmes);
 
-        setJMenuBar(menuBar);
+        menuLogado.add(menuCadastros);
+
+        menuAvaliacoes.setText("Avaliações");
+
+        menuItemMinhasAvaliacoes.setText("Minhas Avaliações");
+        menuAvaliacoes.add(menuItemMinhasAvaliacoes);
+
+        menuLogado.add(menuAvaliacoes);
+
+        menuSistema.setText("Sistema");
+
+        menuItemRelatorio.setText("Relatório");
+        menuSistema.add(menuItemRelatorio);
+
+        menuLogado.add(menuSistema);
+
+        menuConta.setText("Conta");
+
+        menuItemEditarConta.setText("Editar Conta");
+        menuConta.add(menuItemEditarConta);
+
+        menuItemLogout.setText("Logout");
+        menuConta.add(menuItemLogout);
+
+        menuLogado.add(menuConta);
+
+        setJMenuBar(menuLogado);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void contentRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentRelatorioActionPerformed
-        TelaRelatorio telaDeRelatorio = new TelaRelatorio();
-        desktopPane.add(telaDeRelatorio);
-        telaDeRelatorio.setVisible(true);
-        this.pack();
-    }//GEN-LAST:event_contentRelatorioActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
        TelaLogin telaLogin = new TelaLogin(this.desktopPane);
@@ -104,6 +130,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         this.pack();
     }//GEN-LAST:event_btnLoginActionPerformed
 
+   
     /**
      * @param args the command line arguments
      */
@@ -143,11 +170,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
-    private javax.swing.JMenuItem contentRelatorio;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuAvaliacoes;
+    private javax.swing.JMenu menuCadastros;
+    private javax.swing.JMenu menuConta;
+    private javax.swing.JMenuItem menuItemClientes;
+    private javax.swing.JMenuItem menuItemEditarConta;
+    private javax.swing.JMenuItem menuItemLogout;
+    private javax.swing.JMenuItem menuItemMinhasAvaliacoes;
+    private javax.swing.JMenuItem menuItemRelatorio;
+    private javax.swing.JMenuBar menuLogado;
+    private javax.swing.JMenu menuSistema;
+    private javax.swing.JMenuItem menutItemFilmes;
     // End of variables declaration//GEN-END:variables
 
 }
