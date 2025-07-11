@@ -3,11 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/MDIApplication.java to edit this template
  */
 package view;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import model.Usuario;
-
 
 /**
  *
@@ -53,8 +53,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuItemLogout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         desktopPane.setBackground(new java.awt.Color(176, 224, 230));
         desktopPane.setMaximumSize(new java.awt.Dimension(0, 0));
@@ -64,8 +62,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pipoca.png"))); // NOI18N
         jLabel1.setText("Bem-Vindo ao CineTrack");
-        desktopPane.add(jLabel1);
-        jLabel1.setBounds(120, 90, 430, 43);
 
         btnLogin.setBackground(new java.awt.Color(70, 130, 180));
         btnLogin.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
@@ -78,10 +74,33 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 btnLoginActionPerformed(evt);
             }
         });
-        desktopPane.add(btnLogin);
-        btnLogin.setBounds(220, 180, 210, 50);
 
-        getContentPane().add(desktopPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 400));
+        desktopPane.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPane.setLayer(btnLogin, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout desktopPaneLayout = new javax.swing.GroupLayout(desktopPane);
+        desktopPane.setLayout(desktopPaneLayout);
+        desktopPaneLayout.setHorizontalGroup(
+            desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(desktopPaneLayout.createSequentialGroup()
+                .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(desktopPaneLayout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(desktopPaneLayout.createSequentialGroup()
+                        .addGap(229, 229, 229)
+                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(133, Short.MAX_VALUE))
+        );
+        desktopPaneLayout.setVerticalGroup(
+            desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(desktopPaneLayout.createSequentialGroup()
+                .addGap(107, 107, 107)
+                .addComponent(jLabel1)
+                .addGap(41, 41, 41)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(161, Short.MAX_VALUE))
+        );
 
         menuCadastros.setText("Cadastros");
 
@@ -119,18 +138,56 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(menuLogado);
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-       TelaLogin telaLogin = new TelaLogin(this.desktopPane);
-        desktopPane.add(telaLogin);        
+
+        TelaLogin telaLogin = new TelaLogin(this, this.desktopPane);
+        desktopPane.add(telaLogin);
         telaLogin.setVisible(true);
         this.setLocationRelativeTo(null);
         this.pack();
     }//GEN-LAST:event_btnLoginActionPerformed
 
-   
+    public void onLoginSuccess(Usuario usuario) {
+
+        jLabel1.setVisible(false);
+        btnLogin.setVisible(false);
+
+        if ("admin".equals(usuario.getPerfil())) {
+            menuCadastros.setVisible(true);
+            menuSistema.setVisible(true);
+            menuConta.setVisible(true);
+            menuAvaliacoes.setVisible(false);
+
+        } else if ("cliente".equals(usuario.getPerfil())) {
+            
+            menuAvaliacoes.setVisible(true);
+            menuConta.setVisible(true);
+            menuCadastros.setVisible(false);
+            menuSistema.setVisible(false);
+        }
+
+        revalidate();
+        repaint();
+    }
+
     /**
      * @param args the command line arguments
      */

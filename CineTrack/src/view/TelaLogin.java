@@ -9,13 +9,16 @@ import model.Usuario;
  */
 public class TelaLogin extends javax.swing.JInternalFrame {
 
+    private TelaPrincipal parentFrame;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaLogin.class.getName());
     public static int idLogado;
+
     /**
      * Creates new form TelaLogin
      */
-    public TelaLogin(javax.swing.JDesktopPane desktopPane) {
+    public TelaLogin(TelaPrincipal parent, javax.swing.JDesktopPane desktopPane) {
         initComponents();
+        this.parentFrame = parent;
         this.desktopPane = desktopPane;
         codigo_label.setVisible(false);
         txtCodigo.setVisible(false);
@@ -53,7 +56,7 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconifiable(true);
-        setTitle("CineTrack");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/filme.png"))); // NOI18N
 
         login_Panel.setBackground(new java.awt.Color(255, 255, 255));
         login_Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -64,6 +67,7 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(66, 141, 255));
         jLabel1.setText("Login");
 
+        txtUsername.setBackground(new java.awt.Color(255, 255, 255));
         txtUsername.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtUsername.setForeground(new java.awt.Color(51, 51, 51));
 
@@ -83,6 +87,7 @@ public class TelaLogin extends javax.swing.JInternalFrame {
             }
         });
 
+        txtSenha.setBackground(new java.awt.Color(255, 255, 255));
         txtSenha.setForeground(new java.awt.Color(51, 51, 51));
 
         btnCadastrar.setForeground(new java.awt.Color(51, 102, 255));
@@ -102,6 +107,7 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         codigo_label.setForeground(new java.awt.Color(66, 141, 255));
         codigo_label.setText("Código");
 
+        txtCodigo.setBackground(new java.awt.Color(255, 255, 255));
         txtCodigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtCodigo.setForeground(new java.awt.Color(51, 51, 51));
 
@@ -261,6 +267,7 @@ public class TelaLogin extends javax.swing.JInternalFrame {
     }
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         TelaCadastroUsuario telaCadastro = new TelaCadastroUsuario();
+        this.desktopPane.removeAll();
         this.desktopPane.add(telaCadastro);
         telaCadastro.setVisible(true);
         this.pack();
@@ -269,10 +276,21 @@ public class TelaLogin extends javax.swing.JInternalFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         UsuarioController usuarioController = new UsuarioController();
         int codigo = 0;
-        if (txtCodigo.getText().isEmpty()) {
-            codigo = 0;
+        if (!txtCodigo.getText().isEmpty()) {
+            try {
+                codigo = Integer.parseInt(txtCodigo.getText());
+            } catch (NumberFormatException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "O código deve ser um número.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
+
+        // Tenta fazer o login
         Usuario usuario = usuarioController.login(txtUsername.getText(), txtSenha.getPassword(), codigo);
+        if (usuario != null) {
+            this.parentFrame.onLoginSuccess(usuario); 
+            this.dispose();
+        }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void cliente_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cliente_btnActionPerformed
