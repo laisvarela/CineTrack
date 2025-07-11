@@ -55,7 +55,6 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         adm_btn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CineTrack");
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
@@ -273,6 +272,7 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         this.desktopPane.add(telaCadastro);
 
         telaCadastro.setVisible(true);
+        this.pack();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed

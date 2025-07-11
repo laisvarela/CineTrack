@@ -23,7 +23,7 @@ public class UsuarioController {
                 } else {
                     JOptionPane.showMessageDialog(null, "Bem-vindo, usuário " + usuario.getNome() + "!",
                             "Login bem-sucedido", JOptionPane.INFORMATION_MESSAGE);
-                    return null;
+                    return usuario;
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos.", "Erro",

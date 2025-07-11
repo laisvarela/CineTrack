@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/MDIApplication.java to edit this template
  */
 package view;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
 
 /**
  *
@@ -29,68 +33,42 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new javax.swing.JDesktopPane();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
+        btnLogin = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentRelatorio = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
+        desktopPane.setBackground(new java.awt.Color(176, 224, 230));
+        desktopPane.setMaximumSize(new java.awt.Dimension(0, 0));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel1.setForeground(java.awt.Color.cyan);
-        jLabel1.setText("Bem Vindo ao CineTrack");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(70, 130, 180));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pipoca.png"))); // NOI18N
+        jLabel1.setText("Bem-Vindo ao CineTrack");
+        desktopPane.add(jLabel1);
+        jLabel1.setBounds(120, 90, 430, 43);
 
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jLabel1)
-                .addContainerGap(108, Short.MAX_VALUE))
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(jLabel1)
-                .addContainerGap(173, Short.MAX_VALUE))
-        );
-
-        desktopPane.add(jDesktopPane1);
-        jDesktopPane1.setBounds(0, 0, 400, 280);
-
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("Menu");
-
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Login");
-        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setBackground(new java.awt.Color(70, 130, 180));
+        btnLogin.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        btnLogin.setForeground(new java.awt.Color(245, 255, 250));
+        btnLogin.setText("Entrar");
+        btnLogin.setBorderPainted(false);
+        btnLogin.setOpaque(true);
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                openMenuItemActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
-        fileMenu.add(openMenuItem);
+        desktopPane.add(btnLogin);
+        btnLogin.setBounds(220, 180, 210, 50);
 
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Exit");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
+        getContentPane().add(desktopPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 400));
 
         helpMenu.setMnemonic('h');
         helpMenu.setText("Sobre");
@@ -104,31 +82,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         helpMenu.add(contentRelatorio);
 
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
-
         menuBar.add(helpMenu);
 
         setJMenuBar(menuBar);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void contentRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentRelatorioActionPerformed
         TelaRelatorio telaDeRelatorio = new TelaRelatorio();
@@ -138,11 +97,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaDeRelatorio.setVisible(true);
     }//GEN-LAST:event_contentRelatorioActionPerformed
 
-    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
-        TelaLogin telaLogin = new TelaLogin(this.desktopPane);
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+       TelaLogin telaLogin = new TelaLogin(this.desktopPane);
         desktopPane.add(telaLogin);        
         telaLogin.setVisible(true);
-    }//GEN-LAST:event_openMenuItemActionPerformed
+        this.setLocationRelativeTo(null);
+        this.pack();
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,16 +142,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JMenuItem contentRelatorio;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem openMenuItem;
     // End of variables declaration//GEN-END:variables
 
 }
