@@ -175,19 +175,7 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
             perfil = "cliente";
         }
         
-        Usuario newUsuario = new Usuario(txtNome.getText(),txtUsername.getText(),new String(txtCadastroSenha.getPassword()),perfil,null);
-          
-        if ("admin".equals(perfil)) {
-        String codigoStr = javax.swing.JOptionPane.showInputDialog("Digite o código de administrador:");
-        try {
-            int codigo = Integer.parseInt(codigoStr);
-            newUsuario.setCodigoInformado(codigo);
-        } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Código inválido.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
-            return; 
-        }
-    }
-        
+        Usuario newUsuario = new Usuario(txtNome.getText(),txtUsername.getText(),new String(txtCadastroSenha.getPassword()),perfil);
         UsuarioController usuarioController = new UsuarioController();
         usuarioController.cadastrar(newUsuario);
         

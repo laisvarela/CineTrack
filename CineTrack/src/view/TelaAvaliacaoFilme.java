@@ -14,10 +14,12 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
 
     private Avaliacao avaliacao;
     private AvaliacaoController avaliacaoController;
+    private int filmeID;
 
     public TelaAvaliacaoFilme() {
         initComponents();
         avaliacaoController = new AvaliacaoController();
+        this.pack();
     }
 
     /**
@@ -51,6 +53,7 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
         jLabel2.setText("jLabel2");
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setClosable(true);
         setIconifiable(true);
         setTitle("Avaliar Filme");
 
@@ -100,16 +103,31 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
         remover_Button.setForeground(new java.awt.Color(0, 102, 153));
         remover_Button.setText("Remover");
         remover_Button.setBorder(null);
+        remover_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                remover_ButtonActionPerformed(evt);
+            }
+        });
 
         editar_Button.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         editar_Button.setForeground(new java.awt.Color(0, 102, 153));
         editar_Button.setText("Editar");
         editar_Button.setBorder(null);
+        editar_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editar_ButtonActionPerformed(evt);
+            }
+        });
 
         voltar_Button.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         voltar_Button.setForeground(new java.awt.Color(0, 102, 153));
         voltar_Button.setText("<< Voltar");
         voltar_Button.setBorder(null);
+        voltar_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                voltar_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -264,14 +282,31 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void salvar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvar_ButtonActionPerformed
-        FilmeController filmeController = new FilmeController();
-        Filme filme = filmeController.buscarPorTitulo(filme_ComboBox.getSelectedItem().toString());
-        int filmeID = filme.getId();
-        avaliacao = new Avaliacao(TelaLogin.idLogado, filmeID, Integer.parseInt(nota_Txt.getText()), comentario_TextArea.getText());
+        config();
         avaliacaoController.cadastrar(avaliacao);
     }//GEN-LAST:event_salvar_ButtonActionPerformed
 
+    private void editar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_ButtonActionPerformed
+        config();
+        avaliacaoController.editar(TelaLogin.idLogado, filmeID, avaliacao);
+    }//GEN-LAST:event_editar_ButtonActionPerformed
 
+    private void remover_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remover_ButtonActionPerformed
+        config();
+        avaliacaoController.remover(TelaLogin.idLogado, filmeID);
+    }//GEN-LAST:event_remover_ButtonActionPerformed
+
+    private void voltar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltar_ButtonActionPerformed
+        
+    }//GEN-LAST:event_voltar_ButtonActionPerformed
+
+    public void config() {
+        FilmeController filmeController = new FilmeController();
+        Filme filme = filmeController.buscarPorTitulo(filme_ComboBox.getSelectedItem().toString());
+        filmeID = filme.getId();
+        avaliacao = new Avaliacao(TelaLogin.idLogado, filmeID, Integer.parseInt(nota_Txt.getText()), comentario_TextArea.getText());
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable avaliacao_Table;
     private javax.swing.JTextArea comentario_TextArea;

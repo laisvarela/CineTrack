@@ -49,10 +49,11 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         adm_btn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("CineTrack");
         setBackground(new java.awt.Color(255, 255, 255));
-        setResizable(false);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setTitle("CineTrack");
 
         login_Panel.setBackground(new java.awt.Color(255, 255, 255));
         login_Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -63,7 +64,6 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(66, 141, 255));
         jLabel1.setText("Login");
 
-        txtUsername.setBackground(new java.awt.Color(255, 255, 255));
         txtUsername.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtUsername.setForeground(new java.awt.Color(51, 51, 51));
 
@@ -83,14 +83,13 @@ public class TelaLogin extends javax.swing.JInternalFrame {
             }
         });
 
-        txtSenha.setBackground(new java.awt.Color(255, 255, 255));
         txtSenha.setForeground(new java.awt.Color(51, 51, 51));
 
         btnCadastrar.setForeground(new java.awt.Color(51, 102, 255));
         btnCadastrar.setText("Não tem conta? Registre-se");
         btnCadastrar.setBorder(null);
         btnCadastrar.setContentAreaFilled(false);
-        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -103,7 +102,6 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         codigo_label.setForeground(new java.awt.Color(66, 141, 255));
         codigo_label.setText("Código");
 
-        txtCodigo.setBackground(new java.awt.Color(255, 255, 255));
         txtCodigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtCodigo.setForeground(new java.awt.Color(51, 51, 51));
 
@@ -111,7 +109,7 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         voltar_btn.setText("<< Voltar");
         voltar_btn.setBorder(null);
         voltar_btn.setContentAreaFilled(false);
-        voltar_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        voltar_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         voltar_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 voltar_btnActionPerformed(evt);
@@ -263,10 +261,9 @@ public class TelaLogin extends javax.swing.JInternalFrame {
     }
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         TelaCadastroUsuario telaCadastro = new TelaCadastroUsuario();
-
         this.desktopPane.add(telaCadastro);
-
         telaCadastro.setVisible(true);
+        this.pack();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed

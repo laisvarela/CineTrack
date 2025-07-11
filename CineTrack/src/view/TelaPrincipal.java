@@ -15,8 +15,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
-        
-        
+        this.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -54,20 +54,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
+                .addGap(192, 192, 192)
                 .addComponent(jLabel1)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(216, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addGap(163, 163, 163)
                 .addComponent(jLabel1)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
 
         desktopPane.add(jDesktopPane1);
-        jDesktopPane1.setBounds(0, 0, 400, 280);
+        jDesktopPane1.setBounds(0, 0, 610, 460);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Menu");
@@ -116,11 +116,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
         );
 
         pack();
@@ -132,16 +132,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void contentRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentRelatorioActionPerformed
         TelaRelatorio telaDeRelatorio = new TelaRelatorio();
-        
         desktopPane.add(telaDeRelatorio);
-        
         telaDeRelatorio.setVisible(true);
+        this.pack();
     }//GEN-LAST:event_contentRelatorioActionPerformed
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
         TelaLogin telaLogin = new TelaLogin(this.desktopPane);
-        desktopPane.add(telaLogin);        
+        desktopPane.add(telaLogin);
         telaLogin.setVisible(true);
+        this.pack();
     }//GEN-LAST:event_openMenuItemActionPerformed
 
     /**
@@ -176,6 +176,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaPrincipal().setVisible(true);
+
             }
         });
     }
