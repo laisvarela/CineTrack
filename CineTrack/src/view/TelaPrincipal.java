@@ -21,10 +21,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        menuCadastros.setVisible(false);
-        menuSistema.setVisible(false);
-        menuConta.setVisible(false);
-        menuAvaliacoes.setVisible(false);
+        setInitialState();
+        addMenuActions();
 
     }
 
@@ -42,10 +40,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         menuLogado = new javax.swing.JMenuBar();
         menuCadastros = new javax.swing.JMenu();
-        menuItemClientes = new javax.swing.JMenuItem();
-        menutItemFilmes = new javax.swing.JMenuItem();
+        menuItemGerenciarClientes = new javax.swing.JMenuItem();
+        menutItemGerenciarFilmes = new javax.swing.JMenuItem();
         menuAvaliacoes = new javax.swing.JMenu();
-        menuItemMinhasAvaliacoes = new javax.swing.JMenuItem();
+        menuItemAvaliarFilme = new javax.swing.JMenuItem();
         menuSistema = new javax.swing.JMenu();
         menuItemRelatorio = new javax.swing.JMenuItem();
         menuConta = new javax.swing.JMenu();
@@ -90,7 +88,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addGroup(desktopPaneLayout.createSequentialGroup()
                         .addGap(229, 229, 229)
                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         desktopPaneLayout.setVerticalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,23 +97,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(41, 41, 41)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
 
+        menuCadastros.setBackground(new java.awt.Color(0, 0, 0));
         menuCadastros.setText("Cadastros");
 
-        menuItemClientes.setText("Clientes");
-        menuCadastros.add(menuItemClientes);
+        menuItemGerenciarClientes.setText("Gerenciar Clientes");
+        menuCadastros.add(menuItemGerenciarClientes);
 
-        menutItemFilmes.setText("Filmes");
-        menuCadastros.add(menutItemFilmes);
+        menutItemGerenciarFilmes.setBackground(new java.awt.Color(0, 0, 0));
+        menutItemGerenciarFilmes.setText("Gerenciar Filmes");
+        menuCadastros.add(menutItemGerenciarFilmes);
 
         menuLogado.add(menuCadastros);
 
         menuAvaliacoes.setText("Avaliações");
 
-        menuItemMinhasAvaliacoes.setText("Minhas Avaliações");
-        menuAvaliacoes.add(menuItemMinhasAvaliacoes);
+        menuItemAvaliarFilme.setText("Avaliar Filme");
+        menuAvaliacoes.add(menuItemAvaliarFilme);
 
         menuLogado.add(menuAvaliacoes);
 
@@ -142,20 +142,71 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+     private void setInitialState() {
 
+        menuCadastros.setVisible(false);
+        menuSistema.setVisible(false);
+        menuConta.setVisible(false);
+        menuAvaliacoes.setVisible(false);
+
+        desktopPane.removeAll();
+        desktopPane.add(jLabel1);
+        desktopPane.add(btnLogin);
+        jLabel1.setVisible(true);
+        btnLogin.setVisible(true);
+        revalidate();
+        repaint();
+    }
+
+    private void addMenuActions() {
+        // Ação para Gerenciar Filmes (Admin)
+        menutItemGerenciarFilmes.addActionListener(e -> {
+            TelaCadastroFilme tela = new TelaCadastroFilme();
+            desktopPane.add(tela);
+            tela.setVisible(true);
+        });
+
+        // Ação para Gerenciar Clientes (Admin)
+        menuItemGerenciarClientes.addActionListener(e -> {
+            TelaCadastroUsuario tela = new TelaCadastroUsuario();
+            desktopPane.add(tela);
+            tela.setVisible(true);
+        });
+
+        menuItemAvaliarFilme.addActionListener(e -> {
+            TelaAvaliacaoFilme tela = new TelaAvaliacaoFilme();
+            desktopPane.add(tela);
+            tela.setVisible(true);
+        });
+
+        menuItemRelatorio.addActionListener(e -> {
+            TelaRelatorio tela = new TelaRelatorio();
+            desktopPane.add(tela);
+            tela.setVisible(true);
+        });
+
+        menuItemEditarConta.addActionListener(e -> {
+            TelaEditarConta tela = new TelaEditarConta();
+            desktopPane.add(tela);
+            tela.setVisible(true);
+        });
+
+        menuItemLogout.addActionListener(e -> {
+            for (JInternalFrame frame : desktopPane.getAllFrames()) {
+                frame.dispose();
+            }
+            setInitialState();
+        });
+    }
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
         TelaLogin telaLogin = new TelaLogin(this, this.desktopPane);
@@ -164,26 +215,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.pack();
     }//GEN-LAST:event_btnLoginActionPerformed
-
     public void onLoginSuccess(Usuario usuario) {
-
+        
         jLabel1.setVisible(false);
         btnLogin.setVisible(false);
 
         if ("admin".equals(usuario.getPerfil())) {
-            menuCadastros.setVisible(true);
+            menuCadastros.setVisible(true); 
             menuSistema.setVisible(true);
             menuConta.setVisible(true);
             menuAvaliacoes.setVisible(false);
-
         } else if ("cliente".equals(usuario.getPerfil())) {
-            
             menuAvaliacoes.setVisible(true);
             menuConta.setVisible(true);
             menuCadastros.setVisible(false);
             menuSistema.setVisible(false);
         }
-
         revalidate();
         repaint();
     }
@@ -232,14 +279,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuAvaliacoes;
     private javax.swing.JMenu menuCadastros;
     private javax.swing.JMenu menuConta;
-    private javax.swing.JMenuItem menuItemClientes;
+    private javax.swing.JMenuItem menuItemAvaliarFilme;
     private javax.swing.JMenuItem menuItemEditarConta;
+    private javax.swing.JMenuItem menuItemGerenciarClientes;
     private javax.swing.JMenuItem menuItemLogout;
-    private javax.swing.JMenuItem menuItemMinhasAvaliacoes;
     private javax.swing.JMenuItem menuItemRelatorio;
     private javax.swing.JMenuBar menuLogado;
     private javax.swing.JMenu menuSistema;
-    private javax.swing.JMenuItem menutItemFilmes;
+    private javax.swing.JMenuItem menutItemGerenciarFilmes;
     // End of variables declaration//GEN-END:variables
 
 }

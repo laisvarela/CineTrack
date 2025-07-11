@@ -6,17 +6,23 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="menuCadastros">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cadastros"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="menuItemClientes">
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemGerenciarClientes">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Clientes"/>
+                <Property name="text" type="java.lang.String" value="Gerenciar Clientes"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="menutItemFilmes">
+            <MenuItem class="javax.swing.JMenuItem" name="menutItemGerenciarFilmes">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Filmes"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="0" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Gerenciar Filmes"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -26,9 +32,9 @@
             <Property name="text" type="java.lang.String" value="Avalia&#xe7;&#xf5;es"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="menuItemMinhasAvaliacoes">
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemAvaliarFilme">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Minhas Avalia&#xe7;&#xf5;es"/>
+                <Property name="text" type="java.lang.String" value="Avaliar Filme"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -88,18 +94,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="desktopPane" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="desktopPane" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="desktopPane" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="desktopPane" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -128,7 +128,7 @@
                           <Component id="btnLogin" min="-2" pref="210" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="133" max="32767" attributes="0"/>
+                  <EmptySpace pref="139" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -139,7 +139,7 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="btnLogin" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace pref="161" max="32767" attributes="0"/>
+                  <EmptySpace pref="167" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

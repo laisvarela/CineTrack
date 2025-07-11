@@ -4,6 +4,8 @@
  */
 package view;
 
+import controller.*;
+
 /**
  *
  * @author Jao
@@ -15,6 +17,22 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
      */
     public TelaRelatorio() {
         initComponents();
+
+        FilmeController filmeController = new FilmeController();
+
+        java.util.ArrayList<model.Filme> listaDeFilmes = filmeController.listar();
+        StringBuilder relatorio = new StringBuilder();
+        relatorio.append("--- RELATÓRIO DE FILMES CADASTRADOS ---\n\n");
+
+        for (model.Filme filme : listaDeFilmes) {
+            relatorio.append("ID: ").append(filme.getId()).append("\n");
+            relatorio.append("Título: ").append(filme.getTitulo()).append("\n");
+            relatorio.append("Gênero: ").append(filme.getGenero()).append("\n");
+            relatorio.append("Diretor: ").append(filme.getDiretor()).append("\n");
+            relatorio.append("Ano: ").append(filme.getAno()).append("\n");
+            relatorio.append("----------------------------------------\n");
+        }
+        txtAreaRelatorio.setText(relatorio.toString());
     }
 
     /**
@@ -26,15 +44,27 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAreaRelatorio = new javax.swing.JTextArea();
+
+        setBackground(new java.awt.Color(0, 0, 0));
+        setTitle("Relatório");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/filme.png"))); // NOI18N
+
+        txtAreaRelatorio.setBackground(new java.awt.Color(255, 255, 255));
+        txtAreaRelatorio.setColumns(20);
+        txtAreaRelatorio.setRows(5);
+        jScrollPane1.setViewportView(txtAreaRelatorio);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
         );
 
         pack();
@@ -42,5 +72,7 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea txtAreaRelatorio;
     // End of variables declaration//GEN-END:variables
 }

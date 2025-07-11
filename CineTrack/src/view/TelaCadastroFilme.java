@@ -3,19 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package view;
+
 import model.*;
 import controller.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jao
  */
 public class TelaCadastroFilme extends javax.swing.JInternalFrame {
 
+    private int idFilmeEditando = 0;
+
     /**
      * Creates new form TelaCadastroFilme
      */
     public TelaCadastroFilme() {
         initComponents();
+        carregarTabelaFilmes();
     }
 
     /**
@@ -36,8 +44,13 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
         txtGenero = new javax.swing.JTextField();
         txtDiretor = new javax.swing.JTextField();
         txtAno = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelaFilmes = new javax.swing.JTable();
         btnCadastrar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnRemover = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 102, 153));
         setTitle("Cadastrar Filme");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/filme.png"))); // NOI18N
 
@@ -47,7 +60,7 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Título");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Diretor");
 
@@ -67,13 +80,48 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
 
         txtAno.setBackground(new java.awt.Color(255, 255, 255));
 
+        tabelaFilmes.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        tabelaFilmes.setForeground(new java.awt.Color(0, 102, 153));
+        tabelaFilmes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tabelaFilmes);
+
         btnCadastrar.setBackground(new java.awt.Color(255, 255, 255));
-        btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCadastrar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnCadastrar.setForeground(new java.awt.Color(0, 102, 153));
-        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setText("Adicionar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setBackground(new java.awt.Color(255, 255, 255));
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(0, 0, 0));
+        btnEditar.setText("Remover Filme");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnRemover.setBackground(new java.awt.Color(255, 255, 255));
+        btnRemover.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRemover.setForeground(new java.awt.Color(0, 0, 0));
+        btnRemover.setText("Editar Filme");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
             }
         });
 
@@ -85,7 +133,10 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
         jDesktopPane1.setLayer(txtGenero, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(txtDiretor, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(txtAno, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(btnCadastrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(btnEditar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(btnRemover, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -93,8 +144,7 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCadastrar)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel1)
                         .addComponent(jLabel3)
@@ -102,74 +152,154 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
                         .addComponent(jLabel4)
                         .addComponent(txtTitulo)
                         .addComponent(txtGenero, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-                        .addComponent(txtDiretor)
-                        .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(188, Short.MAX_VALUE))
+                        .addComponent(txtDiretor))
+                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCadastrar))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDiretor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCadastrar)
+                        .addGap(0, 33, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(btnEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDiretor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(btnCadastrar)
-                .addGap(24, 24, 24))
+                .addComponent(btnRemover)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void limparCampos() {
+        txtTitulo.setText("");
+        txtGenero.setText("");
+        txtDiretor.setText("");
+        txtAno.setText("");
+        idFilmeEditando = 0; 
+    }
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         int ano = 0;
         try {
             ano = Integer.parseInt(txtAno.getText());
         } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "O ano deve ser um número válido.", "Erro de Formato", javax.swing.JOptionPane.ERROR_MESSAGE);
-            return; 
+            JOptionPane.showMessageDialog(this, "O ano deve ser um número válido.", "Erro de Formato", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         Filme novoFilme = new Filme();
         novoFilme.setTitulo(txtTitulo.getText());
         novoFilme.setGenero(txtGenero.getText());
         novoFilme.setDiretor(txtDiretor.getText());
         novoFilme.setAno(ano);
-        
-        FilmeController filmeController = new FilmeController();        
-        filmeController.cadastrar(novoFilme);
+
+        FilmeController filmeController = new FilmeController();
+        if (idFilmeEditando == 0) {
+            // Se idFilmeEditando é 0, é um novo filme
+            filmeController.cadastrar(novoFilme);
+        } else {
+            // Senão, estamos editando um filme existente
+            filmeController.editar(idFilmeEditando, novoFilme);
+        }
+        limparCampos();
+        carregarTabelaFilmes();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        int selectedRow = tabelaFilmes.getSelectedRow();
+        if (selectedRow >= 0) {
+            int idParaRemover = (int) tabelaFilmes.getValueAt(selectedRow, 0); // Pega o ID da coluna 0
+            int confirm = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover este filme?", "Confirmar Remoção", JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                FilmeController filmeController = new FilmeController();
+                filmeController.remover(idParaRemover);
+                carregarTabelaFilmes(); // Atualiza a tabela
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione um filme na tabela para remover.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        int selectedRow = tabelaFilmes.getSelectedRow();
+        if (selectedRow >= 0) {
+            // Pega os dados da tabela e coloca nos campos de texto
+            idFilmeEditando = (int) tabelaFilmes.getValueAt(selectedRow, 0); // Guarda o ID
+            txtTitulo.setText(tabelaFilmes.getValueAt(selectedRow, 1).toString());
+            txtGenero.setText(tabelaFilmes.getValueAt(selectedRow, 2).toString());
+            txtDiretor.setText(tabelaFilmes.getValueAt(selectedRow, 3).toString());
+            txtAno.setText(tabelaFilmes.getValueAt(selectedRow, 4).toString());
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, selecione um filme na tabela para editar.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnRemoverActionPerformed
+    public void carregarTabelaFilmes() {
+        DefaultTableModel model = new DefaultTableModel(new Object[]{"ID", "Título", "Gênero", "Diretor", "Ano"}, 0);
+        tabelaFilmes.setModel(model);
+
+        FilmeController filmeController = new FilmeController();
+        ArrayList<Filme> filmes = filmeController.listar();
+
+        for (Filme f : filmes) {
+            model.addRow(new Object[]{f.getId(), f.getTitulo(), f.getGenero(), f.getDiretor(), f.getAno()});
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnRemover;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tabelaFilmes;
     private javax.swing.JTextField txtAno;
     private javax.swing.JTextField txtDiretor;
     private javax.swing.JTextField txtGenero;

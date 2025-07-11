@@ -4,12 +4,17 @@
  */
 package view;
 
+import model.*;
+import controller.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jao
  */
 public class TelaEditarConta extends javax.swing.JInternalFrame {
-    
+
+    private model.Usuario usuarioLogado;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaEditarConta.class.getName());
 
     /**
@@ -28,27 +33,176 @@ public class TelaEditarConta extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
+        txtNomeUsuario = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtNovaSenha = new javax.swing.JPasswordField();
+        txtConfirmarSenha = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
+        btnSalvar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Editar Conta");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/filme.png"))); // NOI18N
+
+        jDesktopPane1.setBackground(new java.awt.Color(0, 102, 153));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Nome de Usuário:");
+
+        txtNomeUsuario.setBackground(new java.awt.Color(255, 255, 255));
+        txtNomeUsuario.setForeground(new java.awt.Color(51, 51, 51));
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Nova Senha:");
+
+        txtNovaSenha.setBackground(new java.awt.Color(255, 255, 255));
+        txtNovaSenha.setForeground(new java.awt.Color(0, 0, 0));
+
+        txtConfirmarSenha.setBackground(new java.awt.Color(255, 255, 255));
+        txtConfirmarSenha.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Confirmar Senha:");
+
+        btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
+        btnSalvar.setForeground(new java.awt.Color(0, 102, 153));
+        btnSalvar.setText("Salvar Alterações");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setForeground(new java.awt.Color(0, 102, 153));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(txtNomeUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(txtNovaSenha, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(txtConfirmarSenha, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(btnSalvar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(btnCancelar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addContainerGap(174, Short.MAX_VALUE)
+                        .addComponent(btnCancelar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSalvar))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNomeUsuario)
+                            .addComponent(txtNovaSenha)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtConfirmarSenha))))
+                .addContainerGap())
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNovaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnCancelar))
+                .addContainerGap(81, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        String nomeUsuario = txtNomeUsuario.getText();
+        String novaSenha = new String(txtNovaSenha.getPassword());
+        String confirmarSenha = new String(txtConfirmarSenha.getPassword());
+
+        // Validações
+        if (nomeUsuario.isBlank()) {
+            JOptionPane.showMessageDialog(this, "O nome de usuário não pode estar em branco.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return; // Para a execução
+        }
+
+        if (!novaSenha.isEmpty() || !confirmarSenha.isEmpty()) {
+            if (!novaSenha.equals(confirmarSenha)) {
+                JOptionPane.showMessageDialog(this, "As senhas não coincidem!", "Erro de Senha", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            usuarioLogado.setSenha(novaSenha);
+        }
+
+        usuarioLogado.setUsername(nomeUsuario);
+        usuarioLogado.setNome(nomeUsuario);
+        UsuarioController usuarioController = new UsuarioController();
+        usuarioController.editar(usuarioLogado.getId(), usuarioLogado);
+        this.dispose();
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPasswordField txtConfirmarSenha;
+    private javax.swing.JTextField txtNomeUsuario;
+    private javax.swing.JPasswordField txtNovaSenha;
     // End of variables declaration//GEN-END:variables
 }

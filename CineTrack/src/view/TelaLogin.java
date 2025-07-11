@@ -56,6 +56,7 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconifiable(true);
+        setTitle("Login");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/filme.png"))); // NOI18N
 
         login_Panel.setBackground(new java.awt.Color(255, 255, 255));
