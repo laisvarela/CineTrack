@@ -1,6 +1,7 @@
 package view;
 
 import controller.*;
+import javax.swing.JDesktopPane;
 import model.Usuario;
 
 /**
@@ -9,17 +10,16 @@ import model.Usuario;
  */
 public class TelaLogin extends javax.swing.JInternalFrame {
 
-    private TelaPrincipal parentFrame;
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaLogin.class.getName());
     public static int idLogado;
+    public static String perfi;
+    private TelaPrincipal main;
 
     /**
      * Creates new form TelaLogin
      */
-    public TelaLogin(TelaPrincipal parent, javax.swing.JDesktopPane desktopPane) {
+    public TelaLogin(TelaPrincipal main) {
         initComponents();
-        this.parentFrame = parent;
-        this.desktopPane = desktopPane;
+        this.main = main;
         codigo_label.setVisible(false);
         txtCodigo.setVisible(false);
         escolha_Panel.setVisible(true);
@@ -48,9 +48,11 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         txtCodigo = new javax.swing.JTextField();
         voltar_btn = new javax.swing.JButton();
         escolha_Panel = new javax.swing.JPanel();
-        cliente_btn = new javax.swing.JButton();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jPanel1 = new javax.swing.JPanel();
         adm_btn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        cliente_btn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
@@ -65,15 +67,14 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         login_Panel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(66, 141, 255));
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Login");
 
-        txtUsername.setBackground(new java.awt.Color(255, 255, 255));
         txtUsername.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtUsername.setForeground(new java.awt.Color(51, 51, 51));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(66, 141, 255));
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Senha");
 
         btnEntrar.setBackground(new java.awt.Color(33, 150, 243));
@@ -88,7 +89,6 @@ public class TelaLogin extends javax.swing.JInternalFrame {
             }
         });
 
-        txtSenha.setBackground(new java.awt.Color(255, 255, 255));
         txtSenha.setForeground(new java.awt.Color(51, 51, 51));
 
         btnCadastrar.setForeground(new java.awt.Color(51, 102, 255));
@@ -105,10 +105,9 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cinema.png"))); // NOI18N
 
         codigo_label.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        codigo_label.setForeground(new java.awt.Color(66, 141, 255));
+        codigo_label.setForeground(new java.awt.Color(51, 51, 51));
         codigo_label.setText("Código");
 
-        txtCodigo.setBackground(new java.awt.Color(255, 255, 255));
         txtCodigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtCodigo.setForeground(new java.awt.Color(51, 51, 51));
 
@@ -181,20 +180,12 @@ public class TelaLogin extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        escolha_Panel.setBackground(new java.awt.Color(255, 255, 255));
+        escolha_Panel.setBackground(new java.awt.Color(0, 102, 102));
+        escolha_Panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 153), 5, true));
         escolha_Panel.setForeground(new java.awt.Color(255, 255, 255));
 
-        cliente_btn.setBackground(new java.awt.Color(33, 150, 243));
-        cliente_btn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        cliente_btn.setForeground(new java.awt.Color(255, 255, 255));
-        cliente_btn.setText("Cliente");
-        cliente_btn.setBorderPainted(false);
-        cliente_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        cliente_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cliente_btnActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 204, 204), new java.awt.Color(0, 204, 204), new java.awt.Color(0, 102, 153), new java.awt.Color(0, 102, 153)));
 
         adm_btn.setBackground(new java.awt.Color(33, 150, 243));
         adm_btn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -209,35 +200,85 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 51, 204));
-        jLabel4.setText("Escolha um tipo de usuário");
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel4.setText("Escolha um tipo de usuário:");
+
+        cliente_btn.setBackground(new java.awt.Color(33, 150, 243));
+        cliente_btn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        cliente_btn.setForeground(new java.awt.Color(255, 255, 255));
+        cliente_btn.setText("Cliente");
+        cliente_btn.setBorderPainted(false);
+        cliente_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cliente_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cliente_btnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(adm_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(cliente_btn)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 18, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(16, 16, 16))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addGap(12, 12, 12)
+                .addComponent(cliente_btn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(adm_btn)
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+
+        jLayeredPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout escolha_PanelLayout = new javax.swing.GroupLayout(escolha_Panel);
         escolha_Panel.setLayout(escolha_PanelLayout);
         escolha_PanelLayout.setHorizontalGroup(
             escolha_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escolha_PanelLayout.createSequentialGroup()
-                .addGroup(escolha_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(escolha_PanelLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(escolha_PanelLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(cliente_btn)
-                        .addGap(18, 18, 18)
-                        .addComponent(adm_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         escolha_PanelLayout.setVerticalGroup(
             escolha_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escolha_PanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addGroup(escolha_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cliente_btn)
-                    .addComponent(adm_btn))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLayeredPane1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -245,9 +286,10 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(login_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(login_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(escolha_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(escolha_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,30 +309,26 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         this.pack();
     }
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        TelaCadastroUsuario telaCadastro = new TelaCadastroUsuario();
-        this.desktopPane.removeAll();
-        this.desktopPane.add(telaCadastro);
-        telaCadastro.setVisible(true);
-        this.pack();
+        this.setVisible(false);
+        this.main.telaCadastro();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         UsuarioController usuarioController = new UsuarioController();
-        int codigo = 0;
-        if (!txtCodigo.getText().isEmpty()) {
+        Integer codigo = null;
+        if (!txtCodigo.getText().isBlank()) {
             try {
-                codigo = Integer.parseInt(txtCodigo.getText());
-            } catch (NumberFormatException e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "O código deve ser um número.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+                codigo = Integer.valueOf(txtCodigo.getText());
+            } catch (NumberFormatException ex) {
+                System.out.println("Erro no código;");
                 return;
             }
         }
 
-        // Tenta fazer o login
         Usuario usuario = usuarioController.login(txtUsername.getText(), txtSenha.getPassword(), codigo);
         if (usuario != null) {
-            this.parentFrame.onLoginSuccess(usuario); 
-            this.dispose();
+            this.setVisible(false);
+            this.main.onLoginSuccess(usuario);
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
@@ -329,11 +367,12 @@ public class TelaLogin extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel login_Panel;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtUsername;
     private javax.swing.JButton voltar_btn;
     // End of variables declaration//GEN-END:variables
-    private javax.swing.JDesktopPane desktopPane;
 }

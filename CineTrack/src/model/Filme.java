@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import dao.FilmeDAO;
 
 public class Filme {
+
     private int id;
     private String titulo;
     private String genero;
@@ -22,13 +23,16 @@ public class Filme {
         this.ano = ano;
     }
 
+    public Filme(String titulo, String genero, String diretor, int ano) {
+        this.titulo = titulo;
+        this.genero = genero;
+        this.diretor = diretor;
+        this.ano = ano;
+    }
+
     // Getters e Setters
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitulo() {

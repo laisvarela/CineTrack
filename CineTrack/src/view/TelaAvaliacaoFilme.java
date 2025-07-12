@@ -58,12 +58,12 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
         setTitle("Avaliar Filme");
 
         jTabbedPane1.setBackground(new java.awt.Color(0, 102, 153));
-        jTabbedPane1.setForeground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setForeground(new java.awt.Color(255, 255, 251));
         jTabbedPane1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        avaliacao_Table.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 204, 204), new java.awt.Color(0, 204, 204), new java.awt.Color(0, 102, 153), new java.awt.Color(0, 102, 153)));
+        avaliacao_Table.setBackground(new java.awt.Color(255, 255, 251));
         avaliacao_Table.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         avaliacao_Table.setForeground(new java.awt.Color(0, 102, 153));
         avaliacao_Table.setModel(new javax.swing.table.DefaultTableModel(
@@ -79,19 +79,12 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
         });
-        avaliacao_Table.setGridColor(new java.awt.Color(0, 102, 102));
+        avaliacao_Table.setGridColor(new java.awt.Color(255, 255, 251));
         avaliacao_Table.setSelectionBackground(new java.awt.Color(0, 153, 153));
         avaliacao_Table.setSelectionForeground(new java.awt.Color(255, 255, 255));
         avaliacao_Table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -99,6 +92,7 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
         avaliacao_Table.setShowGrid(true);
         jScrollPane2.setViewportView(avaliacao_Table);
 
+        remover_Button.setBackground(new java.awt.Color(255, 255, 251));
         remover_Button.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         remover_Button.setForeground(new java.awt.Color(0, 102, 153));
         remover_Button.setText("Remover");
@@ -109,9 +103,10 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
             }
         });
 
+        editar_Button.setBackground(new java.awt.Color(255, 255, 251));
         editar_Button.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         editar_Button.setForeground(new java.awt.Color(0, 102, 153));
-        editar_Button.setText("Editar");
+        editar_Button.setText("Salvar edição");
         editar_Button.setBorder(null);
         editar_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,6 +114,7 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
             }
         });
 
+        voltar_Button.setBackground(new java.awt.Color(255, 255, 251));
         voltar_Button.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         voltar_Button.setForeground(new java.awt.Color(0, 102, 153));
         voltar_Button.setText("<< Voltar");
@@ -135,29 +131,26 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(voltar_Button)
+                        .addComponent(voltar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(remover_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)))
-                .addContainerGap())
+                        .addComponent(editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(remover_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editar_Button)
-                    .addComponent(remover_Button)
-                    .addComponent(voltar_Button))
+                    .addComponent(voltar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(remover_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -173,6 +166,7 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(0, 102, 153));
         jLabel1.setText("Selecione o filme: ");
 
+        filme_ComboBox.setBackground(new java.awt.Color(255, 255, 251));
         filme_ComboBox.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         filme_ComboBox.setForeground(new java.awt.Color(51, 51, 51));
         filme_ComboBox.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 204, 204), new java.awt.Color(0, 204, 204), new java.awt.Color(0, 102, 153), new java.awt.Color(0, 102, 153)));
@@ -181,6 +175,7 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(0, 102, 153));
         jLabel3.setText("Nota (1-10):");
 
+        nota_Txt.setBackground(new java.awt.Color(255, 255, 251));
         nota_Txt.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         nota_Txt.setForeground(new java.awt.Color(51, 51, 51));
         nota_Txt.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 204, 204), new java.awt.Color(0, 204, 204), null, new java.awt.Color(0, 102, 153)));
@@ -189,6 +184,7 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
         jLabel4.setForeground(new java.awt.Color(0, 102, 153));
         jLabel4.setText("Comentário:");
 
+        comentario_TextArea.setBackground(new java.awt.Color(255, 255, 251));
         comentario_TextArea.setColumns(20);
         comentario_TextArea.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         comentario_TextArea.setForeground(new java.awt.Color(51, 51, 51));
@@ -212,8 +208,8 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nota_Txt, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 73, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(0, 66, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
         );
         username_PanelLayout.setVerticalGroup(
             username_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +228,9 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1))
         );
 
-        salvar_Button.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        salvar_Button.setBackground(new java.awt.Color(255, 255, 251));
+        salvar_Button.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        salvar_Button.setForeground(new java.awt.Color(51, 51, 51));
         salvar_Button.setText("Salvar");
         salvar_Button.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         salvar_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -246,7 +244,7 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(username_Panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(salvar_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -255,8 +253,8 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(username_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(salvar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(salvar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -266,7 +264,7 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

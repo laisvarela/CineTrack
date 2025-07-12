@@ -32,6 +32,13 @@ public class Usuario {
         this.perfil = perfil;
     }
 
+    public Usuario(int id, String nome, String username, String senha, String perfil) {
+        this.id = id;
+        this.nome = nome;
+        this.username = username;
+        this.senha = senha;
+        this.perfil = perfil;
+    }
     // Getters e Setters
 
     public Integer getCodigoInformado() {
@@ -86,14 +93,16 @@ public class Usuario {
         return codigo;
     }
 
-    public void cadastrar(Usuario u) {
-        new UsuarioDAO().cadastrar(u);
+    public boolean cadastrar(Usuario u) {
+        return new UsuarioDAO().cadastrar(u);
     }
 
     public void editar(int id, Usuario u) {
         new UsuarioDAO().editar(id, u);
     }
-
+    public void ADMEditar(int id, Usuario u) {
+        new UsuarioDAO().ADMEditar(id, u);
+    }
     public Usuario buscarPorId(int id) {
         return new UsuarioDAO().buscarPorId(id);
     }

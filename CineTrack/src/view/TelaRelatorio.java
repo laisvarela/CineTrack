@@ -48,10 +48,11 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
         txtAreaRelatorio = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(0, 0, 0));
+        setClosable(true);
+        setIconifiable(true);
         setTitle("Relatório");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/filme.png"))); // NOI18N
 
-        txtAreaRelatorio.setBackground(new java.awt.Color(255, 255, 255));
         txtAreaRelatorio.setColumns(20);
         txtAreaRelatorio.setRows(5);
         jScrollPane1.setViewportView(txtAreaRelatorio);

@@ -12,7 +12,7 @@ public class ConexaoDAO {
             String url = "jdbc:mysql://localhost:3306/mysql";
             String user = "laisv";
             String password = "lais1234";
-            
+
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(url, user, password);
             criarTabelas(conn);
@@ -35,11 +35,9 @@ public class ConexaoDAO {
                     nome VARCHAR(100),
                     username VARCHAR(40) UNIQUE,
                     senha VARCHAR(40),
-                    perfil ENUM('admin', 'cliente') NOT NULL,
-                    codigo INT
+                    perfil ENUM('admin', 'cliente') NOT NULL
                 );
             """);
-
             // Tabela de filmes
             stmt.executeUpdate("""
                 CREATE TABLE IF NOT EXISTS filmes (

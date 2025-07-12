@@ -43,35 +43,26 @@ public class TelaEditarConta extends javax.swing.JInternalFrame {
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
+        setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
         setTitle("Editar Conta");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/filme.png"))); // NOI18N
 
         jDesktopPane1.setBackground(new java.awt.Color(0, 102, 153));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Nome de Usuário:");
 
-        txtNomeUsuario.setBackground(new java.awt.Color(255, 255, 255));
         txtNomeUsuario.setForeground(new java.awt.Color(51, 51, 51));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nova Senha:");
 
-        txtNovaSenha.setBackground(new java.awt.Color(255, 255, 255));
-        txtNovaSenha.setForeground(new java.awt.Color(0, 0, 0));
-
-        txtConfirmarSenha.setBackground(new java.awt.Color(255, 255, 255));
-        txtConfirmarSenha.setForeground(new java.awt.Color(0, 0, 0));
-
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Confirmar Senha:");
 
-        btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
         btnSalvar.setForeground(new java.awt.Color(0, 102, 153));
         btnSalvar.setText("Salvar Alterações");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +71,6 @@ public class TelaEditarConta extends javax.swing.JInternalFrame {
             }
         });
 
-        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setForeground(new java.awt.Color(0, 102, 153));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {

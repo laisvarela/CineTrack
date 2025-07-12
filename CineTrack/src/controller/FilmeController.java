@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import model.Filme;
 
 public class FilmeController {
+
     public void cadastrar(Filme f) {
         if (f.getTitulo().isBlank() || f.getGenero().isBlank() || f.getDiretor().isBlank() || f.getAno() <= 0) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro",
@@ -19,6 +20,10 @@ public class FilmeController {
             JOptionPane.showMessageDialog(null, "Já existe um filme com esse título.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
 
+        } else if (f.getAno() == 0) {
+            JOptionPane.showMessageDialog(null, "Digite um ano váilo.", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            
         } else if (f != null) {
             new Filme().cadastrar(f);
             System.out.println("Filme cadastrado com sucesso!");

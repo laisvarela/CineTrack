@@ -3,7 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
+
 import controller.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.*;
 
 /**
@@ -11,14 +15,21 @@ import model.*;
  * @author Jao
  */
 public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaCadastroUsuario.class.getName());
+
+    private TelaPrincipal main;
+    private UsuarioController usuarioController;
+    private Usuario usuario;
 
     /**
      * Creates new form TelaCadastroUsuário
      */
-    public TelaCadastroUsuario() {
+    public TelaCadastroUsuario(TelaPrincipal main) {
         initComponents();
+        this.main = main;
+        this.tabela_Panel.setVisible(false);
+        carregarTabelaClientes();
+        usuarioController = new UsuarioController();
+        this.pack();
     }
 
     /**
@@ -31,7 +42,7 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
+        cadastrar_Panel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
@@ -42,6 +53,11 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
         checkUsuario = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
+        tabela_Panel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelaClientes = new javax.swing.JTable();
+        editar_Button = new javax.swing.JButton();
+        remover_Button = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
@@ -50,24 +66,21 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Cadastro");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/filme.png"))); // NOI18N
+        setVisible(true);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        cadastrar_Panel.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(33, 150, 243));
         jLabel1.setText("Cadastrar");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Nome");
 
-        txtNome.setBackground(new java.awt.Color(255, 255, 255));
-
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Senha");
-
-        txtCadastroSenha.setBackground(new java.awt.Color(255, 255, 255));
 
         btnCadastrar.setBackground(new java.awt.Color(33, 150, 243));
         btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -81,55 +94,55 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 
         buttonGroup1.add(checkAdmin);
         checkAdmin.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        checkAdmin.setForeground(new java.awt.Color(0, 0, 0));
+        checkAdmin.setForeground(new java.awt.Color(51, 51, 51));
         checkAdmin.setText("Administrador");
         checkAdmin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         buttonGroup1.add(checkUsuario);
         checkUsuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        checkUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        checkUsuario.setForeground(new java.awt.Color(51, 51, 51));
         checkUsuario.setText("Usuário");
         checkUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Username");
 
-        txtUsername.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout cadastrar_PanelLayout = new javax.swing.GroupLayout(cadastrar_Panel);
+        cadastrar_Panel.setLayout(cadastrar_PanelLayout);
+        cadastrar_PanelLayout.setHorizontalGroup(
+            cadastrar_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cadastrar_PanelLayout.createSequentialGroup()
+                .addGroup(cadastrar_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cadastrar_PanelLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(cadastrar_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(cadastrar_PanelLayout.createSequentialGroup()
                                 .addComponent(checkAdmin)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(checkUsuario))
-                            .addComponent(jLabel3)
-                            .addComponent(txtCadastroSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel3)))
+                    .addGroup(cadastrar_PanelLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNome)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
+                        .addGroup(cadastrar_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCadastroSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(cadastrar_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtNome)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel4)
+                                .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))))
+                    .addGroup(cadastrar_PanelLayout.createSequentialGroup()
+                        .addGap(143, 143, 143)
                         .addComponent(jLabel1)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastrar_PanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(135, 135, 135))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        cadastrar_PanelLayout.setVerticalGroup(
+            cadastrar_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cadastrar_PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(3, 3, 3)
@@ -145,23 +158,114 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCadastroSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(cadastrar_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(checkAdmin)
                     .addComponent(checkUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tabela_Panel.setBackground(new java.awt.Color(255, 255, 255));
+
+        tabelaClientes.setBackground(new java.awt.Color(255, 255, 251));
+        tabelaClientes.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        tabelaClientes.setForeground(new java.awt.Color(0, 102, 153));
+        tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Nome", "Username", "Perfil"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelaClientes.setGridColor(new java.awt.Color(255, 255, 251));
+        tabelaClientes.setSelectionBackground(new java.awt.Color(0, 153, 153));
+        tabelaClientes.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tabelaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tabelaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tabelaClientes.setShowGrid(true);
+        jScrollPane2.setViewportView(tabelaClientes);
+
+        editar_Button.setBackground(new java.awt.Color(255, 255, 251));
+        editar_Button.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        editar_Button.setForeground(new java.awt.Color(0, 102, 153));
+        editar_Button.setText("Salvar edição");
+        editar_Button.setBorder(null);
+        editar_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editar_ButtonActionPerformed(evt);
+            }
+        });
+
+        remover_Button.setBackground(new java.awt.Color(255, 255, 251));
+        remover_Button.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        remover_Button.setForeground(new java.awt.Color(0, 102, 153));
+        remover_Button.setText("Remover");
+        remover_Button.setBorder(null);
+        remover_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                remover_ButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout tabela_PanelLayout = new javax.swing.GroupLayout(tabela_Panel);
+        tabela_Panel.setLayout(tabela_PanelLayout);
+        tabela_PanelLayout.setHorizontalGroup(
+            tabela_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabela_PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tabela_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabela_PanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(remover_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)))
+                .addContainerGap())
+        );
+        tabela_PanelLayout.setVerticalGroup(
+            tabela_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabela_PanelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(tabela_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(remover_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(cadastrar_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tabela_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cadastrar_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(tabela_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -169,33 +273,89 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         String perfil = "";
-        if(checkAdmin.isSelected()){
+        if (checkAdmin.isSelected()) {
             perfil = "admin";
-        } else if(checkUsuario.isSelected()){
+        } else if (checkUsuario.isSelected()) {
             perfil = "cliente";
         }
-        
-        Usuario newUsuario = new Usuario(txtNome.getText(),txtUsername.getText(),new String(txtCadastroSenha.getPassword()),perfil);
-        UsuarioController usuarioController = new UsuarioController();
-        usuarioController.cadastrar(newUsuario);
-        
+        usuario = new Usuario(txtNome.getText(), txtUsername.getText(), String.valueOf(txtCadastroSenha.getPassword()), perfil);
+        boolean cadastrado = usuarioController.cadastrar(usuario);
+        if (cadastrado) {
+            Usuario userLogado = null;
+
+            if (TelaLogin.idLogado >= 0) {
+                userLogado = usuarioController.buscarPorId(TelaLogin.idLogado);
+            }
+
+            if (userLogado != null && userLogado.getPerfil().equalsIgnoreCase("admin")) {
+                carregarTabelaClientes();
+            } else {
+                this.main.setInitialState();
+                carregarTabelaClientes();
+            }
+        }
+
     }//GEN-LAST:event_btnCadastrarActionPerformed
+    public void carregarTabelaClientes() {
+        DefaultTableModel model = (DefaultTableModel) tabelaClientes.getModel();
+        model.setRowCount(0);
+        usuarioController = new UsuarioController();
+        ArrayList<Usuario> usuariolist = usuarioController.listar();
+
+        for (Usuario u : usuariolist) {
+            model.addRow(new Object[]{u.getId(), u.getNome(), u.getUsername(), u.getPerfil()});
+        }
+    }
+    private void editar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_ButtonActionPerformed
+        int linha = tabelaClientes.getSelectedRow();
+        if (linha >= 0) {
+            int id = (int) tabelaClientes.getValueAt(linha, 0);
+            String novoNome = tabelaClientes.getValueAt(linha, 1).toString();
+            String novoUsername = tabelaClientes.getValueAt(linha, 2).toString();
+
+            Usuario usuario = new Usuario();
+            usuario.setId(id);
+            usuario.setNome(novoNome);
+            usuario.setUsername(novoUsername);
+            System.out.println("Editando usuário: id=" + id + ", nome=" + novoNome + ", username=" + novoUsername);
+            usuarioController.ADMEditar(id, usuario);
+            carregarTabelaClientes();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um usuário para editar.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_editar_ButtonActionPerformed
+
+    private void remover_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remover_ButtonActionPerformed
+        int linha = tabelaClientes.getSelectedRow();
+        if (linha > 0) {
+            int id = (int) tabelaClientes.getValueAt(linha, 0);
+            usuarioController.remover(id);
+            carregarTabelaClientes();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um usuário para remover.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_remover_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JPanel cadastrar_Panel;
     private javax.swing.JCheckBox checkAdmin;
     private javax.swing.JCheckBox checkUsuario;
+    private javax.swing.JButton editar_Button;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton remover_Button;
+    private javax.swing.JTable tabelaClientes;
+    public javax.swing.JPanel tabela_Panel;
     private javax.swing.JPasswordField txtCadastroSenha;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtUsername;

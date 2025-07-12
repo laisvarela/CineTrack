@@ -25,11 +25,11 @@ public class UsuarioDAO {
 
             if (rs.next()) {
                 return new Usuario(
+                        rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getString("username"),
                         rs.getString("senha"),
-                        rs.getString("perfil"),
-                        rs.getInt("codigo"));
+                        rs.getString("perfil"));
             }
         } catch (SQLException e) {
             System.out.println("Erro ao validar login: " + e);
@@ -39,8 +39,8 @@ public class UsuarioDAO {
         return null;
     }
 
-    public void cadastrar(Usuario u) {
-        String sql = "INSERT INTO usuarios (nome, username, senha, perfil, codigo) VALUES (?, ?, ?, ?, ?)";
+    public boolean cadastrar(Usuario u) {
+        String sql = "INSERT INTO usuarios (nome, username, senha, perfil) VALUES (?, ?, ?, ?)";
         try {
             conn = ConexaoDAO.ConectorBD();
             stmt = conn.prepareStatement(sql);
@@ -48,39 +48,46 @@ public class UsuarioDAO {
             stmt.setString(2, u.getUsername());
             stmt.setString(3, u.getSenha());
             stmt.setString(4, u.getPerfil());
-            if ("admin".equals(u.getPerfil())) {
-                stmt.setInt(5, u.getCodigo());
-            } else {
-                stmt.setNull(5, java.sql.Types.INTEGER);
-            }
             stmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             System.out.println("Erro ao cadastrar usuário: " + e);
+            return false;
         } finally {
             fechar();
         }
-
     }
 
     public void editar(int id, Usuario u) {
-        String sql = "UPDATE usuarios SET nome = ?, username = ?, senha = ?, perfil = ?, codigo = ? WHERE id = ?";
+        String sql = "UPDATE usuarios SET nome = ?, username = ?, senha = ?, WHERE id = ?";
         try {
             conn = ConexaoDAO.ConectorBD();
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getUsername());
             stmt.setString(3, u.getSenha());
-            stmt.setString(4, u.getPerfil());
-            if ("admin".equals(u.getPerfil())) {
-                stmt.setInt(5, u.getCodigo());
-            } else {
-                stmt.setNull(5, 0);
-            }
-            stmt.setInt(6, id);
+            stmt.setInt(4, id);
             stmt.executeUpdate();
             System.out.println("Usuário editado com sucesso!");
         } catch (SQLException e) {
             System.out.println("Erro ao editar usuário: " + e);
+        } finally {
+            fechar();
+        }
+    }
+
+    public void ADMEditar(int id, Usuario u) {
+        String sql = "UPDATE usuarios SET nome = ?, username = ? WHERE id = ?";
+        try {
+            conn = ConexaoDAO.ConectorBD();
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, u.getNome());
+            stmt.setString(2, u.getUsername());
+            stmt.setInt(3, id);
+            stmt.executeUpdate();
+            System.out.println("Usuário editado pelo ADM com sucesso!");
+        } catch (SQLException e) {
+            System.out.println("Erro ao ADM editar usuário: " + e);
         } finally {
             fechar();
         }
@@ -95,11 +102,11 @@ public class UsuarioDAO {
             rs = stmt.executeQuery();
             if (rs.next()) {
                 return new Usuario(
+                        rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getString("username"),
                         rs.getString("senha"),
-                        rs.getString("perfil"),
-                        rs.getInt("codigo"));
+                        rs.getString("perfil"));
             }
         } catch (SQLException e) {
             System.out.println("Erro ao buscar usuário: " + e);
@@ -118,11 +125,11 @@ public class UsuarioDAO {
             rs = stmt.executeQuery();
             if (rs.next()) {
                 return new Usuario(
+                        rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getString("username"),
                         rs.getString("senha"),
-                        rs.getString("perfil"),
-                        rs.getInt("codigo"));
+                        rs.getString("perfil"));
             }
         } catch (SQLException e) {
             System.out.println("Erro ao buscar usuário por username: " + e);
@@ -141,11 +148,11 @@ public class UsuarioDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 lista.add(new Usuario(
+                        rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getString("username"),
                         rs.getString("senha"),
-                        rs.getString("perfil"),
-                        rs.getInt("codigo")));
+                        rs.getString("perfil")));
             }
         } catch (SQLException e) {
             System.out.println("Erro ao listar usuários: " + e);
