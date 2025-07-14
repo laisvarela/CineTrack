@@ -1,7 +1,6 @@
 package view;
 
 import controller.*;
-import javax.swing.JDesktopPane;
 import model.Usuario;
 
 /**
@@ -25,6 +24,7 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         txtCodigo.setVisible(false);
         escolha_Panel.setVisible(true);
         login_Panel.setVisible(false);
+        limparCampos();
         this.pack();
     }
 
@@ -353,6 +353,11 @@ public class TelaLogin extends javax.swing.JInternalFrame {
         this.pack();
     }//GEN-LAST:event_voltar_btnActionPerformed
 
+    private void limparCampos(){
+        txtCodigo.setText(null);
+        txtSenha.setText(null);
+        txtUsername.setText(null);
+    }
     /**
      * @param args the command line arguments
      */

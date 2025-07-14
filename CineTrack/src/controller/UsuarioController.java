@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import view.TelaLogin;
+
 /* @author lais.v */
 public class UsuarioController {
 
@@ -16,36 +17,39 @@ public class UsuarioController {
 
         String senha = String.valueOf(senhaChars);
         Usuario usuario = new Usuario().login(username, senha);
-
-        if (usuario == null) {
+        Usuario teste = new Usuario().buscarPorUsername(username);
+        if (usuario == null && teste == null) {
             JOptionPane.showMessageDialog(null, "Usuário não existe.", "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
-        }
-
-        if (!senha.equals(usuario.getSenha())) {
+        } else if (usuario == null && teste != null) {
             JOptionPane.showMessageDialog(null, "Senha incorreta.", "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
-        }
-
-        if (usuario.getPerfil().equalsIgnoreCase("admin")) {
-            if (codigoInformado == null || !codigoInformado.equals(usuario.getCodigo())) {
-                JOptionPane.showMessageDialog(null, "Código de administrador inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
-                return null;
-            }
-            JOptionPane.showMessageDialog(null, "Bem-vindo, administrador " + usuario.getNome() + "!", "Login bem-sucedido", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Bem-vindo, usuário " + usuario.getNome() + "!", "Login bem-sucedido", JOptionPane.INFORMATION_MESSAGE);
+            if (usuario.getPerfil().equalsIgnoreCase("admin")) {
+                if (codigoInformado == null || !codigoInformado.equals(usuario.getCodigo())) {
+                    JOptionPane.showMessageDialog(null, "Código de administrador inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return null;
+                }
+                JOptionPane.showMessageDialog(null, "Bem-vindo, administrador " + usuario.getNome() + "!", "Login bem-sucedido", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Bem-vindo, usuário " + usuario.getNome() + "!", "Login bem-sucedido", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            TelaLogin.idLogado = usuario.getId();
+            return usuario;
         }
 
-        TelaLogin.idLogado = usuario.getId();
-        return usuario;
     }
 
     // cadastra um Usuario caso os valores de Usuario u sejam válidos
-    public boolean cadastrar(Usuario u) {
+    public boolean cadastrar(Usuario u, char[] senhaConfirmar) {
         if (u.getNome().isBlank() || u.getUsername().isBlank() || u.getSenha().isBlank()) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if (!senhaConfirmar.equals(u.getSenha())) {
+            JOptionPane.showMessageDialog(null, "As senhas não iguais.", "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
             return false;
         } else if (u.getSenha().length() < 4) {
             JOptionPane.showMessageDialog(null, "A senha deve ter pelo menos 4 caracteres.", "Atenção",
@@ -107,7 +111,7 @@ public class UsuarioController {
         }
 
     }
-    
+
     // retorna um Usuario se o id for válido
     public Usuario buscarPorId(int id) {
         if (id <= 0) {

@@ -2,24 +2,32 @@ package view;
 
 import controller.AvaliacaoController;
 import controller.FilmeController;
+import controller.UsuarioController;
+import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import model.Avaliacao;
 import model.Filme;
-import model.Usuario;
 
 /**
  *
  * @author Jao
- * @author lais.v 
+ * @author lais.v
  */
 public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
 
     private Avaliacao avaliacao;
     private AvaliacaoController avaliacaoController;
-    private int filmeID;
+    private ArrayList<Filme> listaFilmes;
 
     public TelaAvaliacaoFilme() {
         initComponents();
         avaliacaoController = new AvaliacaoController();
+        carregarTabelaAvaliacao();
+        carregarTitulosFilmes();
+        limparCampos();
         this.pack();
     }
 
@@ -36,10 +44,9 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        avaliacao_Table = new javax.swing.JTable();
+        tabelaAvaliacao = new javax.swing.JTable();
         remover_Button = new javax.swing.JButton();
         editar_Button = new javax.swing.JButton();
-        voltar_Button = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         username_Panel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -64,14 +71,12 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        avaliacao_Table.setBackground(new java.awt.Color(255, 255, 251));
-        avaliacao_Table.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        avaliacao_Table.setForeground(new java.awt.Color(0, 102, 153));
-        avaliacao_Table.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaAvaliacao.setBackground(new java.awt.Color(255, 255, 251));
+        tabelaAvaliacao.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        tabelaAvaliacao.setForeground(new java.awt.Color(0, 102, 153));
+        tabelaAvaliacao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Filme", "Nota", "Comentário"
@@ -85,13 +90,13 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
-        avaliacao_Table.setGridColor(new java.awt.Color(255, 255, 251));
-        avaliacao_Table.setSelectionBackground(new java.awt.Color(0, 153, 153));
-        avaliacao_Table.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        avaliacao_Table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        avaliacao_Table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        avaliacao_Table.setShowGrid(true);
-        jScrollPane2.setViewportView(avaliacao_Table);
+        tabelaAvaliacao.setGridColor(new java.awt.Color(255, 255, 251));
+        tabelaAvaliacao.setSelectionBackground(new java.awt.Color(0, 153, 153));
+        tabelaAvaliacao.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tabelaAvaliacao.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tabelaAvaliacao.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tabelaAvaliacao.setShowGrid(true);
+        jScrollPane2.setViewportView(tabelaAvaliacao);
 
         remover_Button.setBackground(new java.awt.Color(255, 255, 251));
         remover_Button.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -115,31 +120,20 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
             }
         });
 
-        voltar_Button.setBackground(new java.awt.Color(255, 255, 251));
-        voltar_Button.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        voltar_Button.setForeground(new java.awt.Color(0, 102, 153));
-        voltar_Button.setText("<< Voltar");
-        voltar_Button.setBorder(null);
-        voltar_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                voltar_ButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(voltar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(remover_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(remover_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -148,10 +142,9 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(remover_Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editar_Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(voltar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(remover_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -276,35 +269,116 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void carregarTitulosFilmes() {
+        FilmeController filmeController = new FilmeController();
+        listaFilmes = filmeController.listar();
+
+        filme_ComboBox.removeAll();
+        for (Filme f : listaFilmes) {
+            filme_ComboBox.addItem(f.getTitulo());
+        }
+    }
+
+    public void carregarTabelaAvaliacao() {
+        DefaultTableModel model = (DefaultTableModel) tabelaAvaliacao.getModel();
+        model.setRowCount(0);
+
+        FilmeController filmeController = new FilmeController();
+        ArrayList<Avaliacao> avaliacaoList = avaliacaoController.listarPorUsuario(TelaLogin.idLogado);
+
+        TableColumn filmeColumn = tabelaAvaliacao.getColumnModel().getColumn(0);
+        filmeColumn.setCellEditor(new DefaultCellEditor(filme_ComboBox));
+
+        for (Avaliacao a : avaliacaoList) {
+            String tituloFilme = filmeController.buscarPorId(a.getFilmeId()).getTitulo();
+            model.addRow(new Object[]{tituloFilme, a.getNota(), a.getComentario()});
+        }
+    }
 
     private void salvar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvar_ButtonActionPerformed
-        config();
+        String notaStr = nota_Txt.getText().replaceAll(",", ".");
+        int nota;
+        if (notaStr.isBlank() || notaStr.isEmpty()) {
+            nota = -1;
+        } else {
+            try {
+                nota = Integer.parseInt(notaStr);
+            } catch (NumberFormatException e) {
+                double notaQuebrada = Double.parseDouble(notaStr);
+                nota = (int) Math.round(notaQuebrada);
+            }
+        }
+
+        avaliacao = new Avaliacao(TelaLogin.idLogado, filmeId(), nota, comentario_TextArea.getText());
         avaliacaoController.cadastrar(avaliacao);
+        carregarTabelaAvaliacao();
+        limparCampos();
     }//GEN-LAST:event_salvar_ButtonActionPerformed
 
     private void editar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_ButtonActionPerformed
-        config();
-        avaliacaoController.editar(TelaLogin.idLogado, filmeID, avaliacao);
+        int linha = tabelaAvaliacao.getSelectedRow();
+
+        if (linha >= 0) {
+            FilmeController filmeController = new FilmeController();
+            String tituloFilme = tabelaAvaliacao.getValueAt(linha, 0).toString();
+            int filmeId = filmeController.buscarPorTitulo(tituloFilme).getId();
+
+            String notaStr = tabelaAvaliacao.getValueAt(linha, 1).toString();
+            int nota;
+
+            try {
+                nota = Integer.parseInt(notaStr);
+            } catch (NumberFormatException ex) {
+                try {
+                    double notaQuebrada = Double.parseDouble(notaStr);
+                    nota = (int) Math.round(notaQuebrada);
+                    JOptionPane.showMessageDialog(null, "Nota arredondada para " + nota, "Aviso", JOptionPane.WARNING_MESSAGE);
+                } catch (NumberFormatException e2) {
+                    JOptionPane.showMessageDialog(null, "A nota deve ser um número válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            String comentario = tabelaAvaliacao.getValueAt(linha, 2).toString();
+
+            Avaliacao nova = new Avaliacao(TelaLogin.idLogado, filmeId, nota, comentario);
+            avaliacaoController.editar(TelaLogin.idLogado, filmeId, nova);
+            carregarTabelaAvaliacao();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione uma avaliação para editar.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_editar_ButtonActionPerformed
 
     private void remover_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remover_ButtonActionPerformed
-        config();
-        avaliacaoController.remover(TelaLogin.idLogado, filmeID);
+        FilmeController filmeController = new FilmeController();
+        int linha = tabelaAvaliacao.getSelectedRow();
+        if (linha >= 0) {
+            int filmeId = filmeController.buscarPorTitulo(tabelaAvaliacao.getValueAt(linha, 0).toString()).getId();
+
+            avaliacaoController.remover(TelaLogin.idLogado, filmeId);
+            carregarTabelaAvaliacao();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione uma avaliação para remover.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_remover_ButtonActionPerformed
 
-    private void voltar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltar_ButtonActionPerformed
-        
-    }//GEN-LAST:event_voltar_ButtonActionPerformed
-
-    public void config() {
-        FilmeController filmeController = new FilmeController();
-        Filme filme = filmeController.buscarPorTitulo(filme_ComboBox.getSelectedItem().toString());
-        filmeID = filme.getId();
-        avaliacao = new Avaliacao(TelaLogin.idLogado, filmeID, Integer.parseInt(nota_Txt.getText()), comentario_TextArea.getText());
-
+    private int filmeId() {
+        for (Filme f : listaFilmes) {
+            if (f.getTitulo().equalsIgnoreCase(filme_ComboBox.getSelectedItem().toString())) {
+                return f.getId();
+            }
+        }
+        return -1;
     }
+
+    private void limparCampos() {
+        nota_Txt.setText(null);
+        comentario_TextArea.setText(null);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable avaliacao_Table;
     private javax.swing.JTextArea comentario_TextArea;
     private javax.swing.JButton editar_Button;
     private javax.swing.JComboBox<String> filme_ComboBox;
@@ -320,7 +394,7 @@ public class TelaAvaliacaoFilme extends javax.swing.JInternalFrame {
     private javax.swing.JTextField nota_Txt;
     private javax.swing.JButton remover_Button;
     private javax.swing.JButton salvar_Button;
+    private javax.swing.JTable tabelaAvaliacao;
     private javax.swing.JPanel username_Panel;
-    private javax.swing.JButton voltar_Button;
     // End of variables declaration//GEN-END:variables
 }

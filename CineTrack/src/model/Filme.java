@@ -12,18 +12,18 @@ public class Filme {
     private String diretor;
     private int ano;
 
-    public Filme() {
-    }
-
-    public Filme(int id, String titulo, String genero, String diretor, int ano) {
-        this.id = id;
+    public Filme(String titulo, String genero, String diretor, int ano) {
         this.titulo = titulo;
         this.genero = genero;
         this.diretor = diretor;
         this.ano = ano;
     }
 
-    public Filme(String titulo, String genero, String diretor, int ano) {
+    public Filme() {
+    }
+
+    public Filme(int id, String titulo, String genero, String diretor, int ano) {
+        this.id = id;
         this.titulo = titulo;
         this.genero = genero;
         this.diretor = diretor;

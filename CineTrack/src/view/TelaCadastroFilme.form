@@ -497,9 +497,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="214" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="editar_Button" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                          <Component id="remover_Button" alignment="3" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="editar_Button" pref="34" max="32767" attributes="0"/>
+                          <Component id="remover_Button" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>

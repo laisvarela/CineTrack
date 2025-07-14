@@ -4,7 +4,9 @@ import model.*;
 import controller.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableColumn;
 
 /**
  * @author Jao
@@ -21,6 +23,7 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
     public TelaCadastroFilme() {
         initComponents();
         carregarTabelaFilmes();
+        limparCampos();
         filmeController = new FilmeController();
     }
 
@@ -328,8 +331,8 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(editar_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addComponent(remover_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -357,7 +360,7 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
 
     private void remover_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remover_ButtonActionPerformed
         int linha = tabelaFilmes.getSelectedRow();
-        if (linha > 0) {
+        if (linha >= 0) {
             int id = (int) tabelaFilmes.getValueAt(linha, 0);
             filmeController.remover(id);
             carregarTabelaFilmes();
@@ -373,7 +376,7 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
             String novoTitulo = tabelaFilmes.getValueAt(linha, 1).toString();
             String novoGenero = tabelaFilmes.getValueAt(linha, 2).toString();
             String novoDiretor = tabelaFilmes.getValueAt(linha, 3).toString();
-            int novoAno = Integer.parseInt(tabelaFilmes.getValueAt(linha, 3).toString());
+            int novoAno = Integer.parseInt(tabelaFilmes.getValueAt(linha, 4).toString());
 
             filme = new Filme(novoTitulo, novoGenero, novoDiretor, novoAno);
             filmeController.editar(id, filme);
@@ -404,7 +407,8 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
         model.setRowCount(0);
         filmeController = new FilmeController();
         ArrayList<Filme> filmeList = filmeController.listar();
-
+        TableColumn generoColumn = tabelaFilmes.getColumnModel().getColumn(2);
+        generoColumn.setCellEditor(new DefaultCellEditor(generoComboBox));
         for (Filme f : filmeList) {
             model.addRow(new Object[]{f.getId(), f.getTitulo(), f.getGenero(), f.getDiretor(), f.getAno()});
         }

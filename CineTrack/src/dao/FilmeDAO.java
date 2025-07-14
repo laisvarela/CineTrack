@@ -25,6 +25,7 @@ public class FilmeDAO {
             stmt.setString(3, f.getDiretor());
             stmt.setInt(4, f.getAno());
             stmt.executeUpdate();
+            System.out.println("Filme cadastrado no banco de dados.");
         } catch (SQLException e) {
             System.out.println("Erro ao cadastrar filme: " + e);
         } finally {
@@ -44,6 +45,7 @@ public class FilmeDAO {
             stmt.setInt(4, f.getAno());
             stmt.setInt(5, id);
             stmt.executeUpdate();
+            System.out.println("Filme editado no banco de dados.");
         } catch (SQLException e) {
             System.out.println("Erro ao editar filme: " + e);
         } finally {

@@ -19,7 +19,7 @@ public class AvaliacaoController {
         } else if (new Avaliacao().buscar(a.getUsuarioId(), a.getFilmeId()) != null) {
             JOptionPane.showMessageDialog(null, "Já existe uma avaliação para este filme por este usuário.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (a != null) {
+        } else {
             new Avaliacao().cadastrar(a);
             JOptionPane.showMessageDialog(null, "Avaliação cadastrada com sucesso!", "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -29,13 +29,17 @@ public class AvaliacaoController {
     // edita avaliação do Usuario sobre um Filme, identificados pelo usuarioId e filmeId, 
     // caso os valores de Avaliacao nova sejam válidos
     public void editar(int usuarioId, int filmeId, Avaliacao nova) {
-        if (nova.getNota() < 1 || nova.getNota() > 10 || nova.getComentario().isBlank()) {
-            JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos corretamente.", "Erro",
+        if (nova.getComentario().isBlank() || nova.getNota() == -1) {
+            JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
+        } else if (nova.getNota() < 1 || nova.getNota() > 10) {
+            JOptionPane.showMessageDialog(null, "Nota deve ser um número inteiro de 1 a 10.", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+
         } else if (new Avaliacao().buscar(usuarioId, filmeId) == null) {
             JOptionPane.showMessageDialog(null, "Avaliação não encontrada.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (nova != null) {
+        } else {
             new Avaliacao().editar(usuarioId, filmeId, nova);
             JOptionPane.showMessageDialog(null, "Avaliação editada com sucesso!", "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -63,8 +67,7 @@ public class AvaliacaoController {
             JOptionPane.showMessageDialog(null, "ID de usuário inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         } else if (new Avaliacao().listarPorUsuario(usuarioId).isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Nenhuma avaliação encontrada para este usuário.", "Informação",
-                    JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Nenhuma avaliação encontrada para este usuário.");
             return new ArrayList<>();
         } else {
             return new Avaliacao().listarPorUsuario(usuarioId);

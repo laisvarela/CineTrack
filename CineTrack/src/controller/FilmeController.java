@@ -20,11 +20,7 @@ public class FilmeController {
             JOptionPane.showMessageDialog(null, "Já existe um filme com esse título.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
 
-        } else if (f.getAno() == 0) {
-            JOptionPane.showMessageDialog(null, "Digite um ano váilo.", "Erro",
-                    JOptionPane.ERROR_MESSAGE);
-
-        } else if (f != null) {
+        } else {
             new Filme().cadastrar(f);
             System.out.println("Filme cadastrado com sucesso!");
         }
@@ -47,7 +43,7 @@ public class FilmeController {
         } else if (new Filme().buscarPorId(id) == null) {
             JOptionPane.showMessageDialog(null, "Filme não encontrado.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (f != null) {
+        } else {
             new Filme().editar(id, f);
             JOptionPane.showMessageDialog(null, "Filme editado com sucesso!", "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -64,12 +60,9 @@ public class FilmeController {
         }
         Filme filme = new Filme().buscarPorId(id);
         if (filme == null) {
-            JOptionPane.showMessageDialog(null, "Filme não encontrado.", "Erro",
-                    JOptionPane.ERROR_MESSAGE);
+            System.out.println("Filme não encontrado.");
             return null;
         } else {
-            JOptionPane.showMessageDialog(null, "Filme encontrado: " + filme.getTitulo(), "Sucesso",
-                    JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Filme encontrado: " + filme.getTitulo());
             return filme;
         }
@@ -84,12 +77,9 @@ public class FilmeController {
         }
         Filme filme = new Filme().buscarPorTitulo(titulo);
         if (filme == null) {
-            JOptionPane.showMessageDialog(null, "Filme não encontrado.", "Erro",
-                    JOptionPane.ERROR_MESSAGE);
+            System.out.println("Filme não encontrado.");
             return null;
         } else {
-            JOptionPane.showMessageDialog(null, "Filme encontrado: " + filme.getTitulo(), "Sucesso",
-                    JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Filme encontrado: " + filme.getTitulo());
             return filme;
         }
@@ -98,12 +88,10 @@ public class FilmeController {
     // retorna uma lista de filmes 
     public ArrayList<Filme> listar() {
         if (new Filme().listar().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Nenhum filme cadastrado.", "Informação",
-                    JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Nenhum filme cadastrado.");
             return new ArrayList<>();
         } else {
-            JOptionPane.showMessageDialog(null, "Total de filmes cadastrados: " + new Filme().listar().size(),
-                    "Informação", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Total de filmes cadastrados: " + new Filme().listar().size());
             return new Filme().listar();
         }
 
