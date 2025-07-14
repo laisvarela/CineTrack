@@ -7,6 +7,7 @@ import model.Usuario;
 /**
  *
  * @author Jao
+ * @author lais.v 
  */
 public class TelaLogin extends javax.swing.JInternalFrame {
 

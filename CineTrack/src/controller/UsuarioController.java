@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import view.TelaLogin;
-
+/* @author lais.v */
 public class UsuarioController {
 
+    // retorna um Usuario para o login caso os valores sejam válidos
     public Usuario login(String username, char[] senhaChars, Integer codigoInformado) {
         if (username.isBlank() || senhaChars.length == 0) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -40,6 +41,7 @@ public class UsuarioController {
         return usuario;
     }
 
+    // cadastra um Usuario caso os valores de Usuario u sejam válidos
     public boolean cadastrar(Usuario u) {
         if (u.getNome().isBlank() || u.getUsername().isBlank() || u.getSenha().isBlank()) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro",
@@ -63,6 +65,7 @@ public class UsuarioController {
         }
     }
 
+    // edita um usuário existente, passando os novos valores através do objeto Usuario u e editando no id encontrado
     public void editar(int id, Usuario u) {
         if (u.getNome().isBlank() || u.getUsername().isBlank() || u.getSenha().isBlank()) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro",
@@ -82,6 +85,7 @@ public class UsuarioController {
 
     }
 
+    // função editar do Administrador, como administrador editando cliente, é possível editar apenas nome e username
     public void ADMEditar(int id, Usuario u) {
         if (u.getNome().isBlank() || u.getUsername().isBlank()) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro",
@@ -103,7 +107,8 @@ public class UsuarioController {
         }
 
     }
-
+    
+    // retorna um Usuario se o id for válido
     public Usuario buscarPorId(int id) {
         if (id <= 0) {
             JOptionPane.showMessageDialog(null, "ID inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -123,6 +128,7 @@ public class UsuarioController {
         }
     }
 
+    // retorna um Usuario se o username for válido
     public Usuario buscarPorUsername(String username) {
         if (username.isBlank()) {
             JOptionPane.showMessageDialog(null, "O nome de usuário não pode estar vazio.", "Erro",
@@ -141,19 +147,19 @@ public class UsuarioController {
         }
     }
 
+    // retorna uma lista de Usuario 
     public ArrayList<Usuario> listar() {
-        ArrayList<Usuario> usuarios = new ArrayList<>();
         if (new Usuario().listar().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nenhum usuário cadastrado.", "Informação",
                     JOptionPane.INFORMATION_MESSAGE);
-            return usuarios;
+            return new ArrayList<>();
         } else {
-            usuarios = new Usuario().listar();
-            System.out.println("Total de usuários cadastrados: " + usuarios.size());
-            return usuarios;
+            System.out.println("Total de usuários cadastrados: " + new Usuario().listar().size());
+            return new Usuario().listar();
         }
     }
 
+    // remove o usuario caso o id seja válido
     public void remover(int id) {
         if (id <= 0) {
             JOptionPane.showMessageDialog(null, "ID inválido.", "Erro", JOptionPane.ERROR_MESSAGE);

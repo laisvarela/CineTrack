@@ -4,15 +4,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+/* @author lais.v */
 public class ConexaoDAO {
 
     public static Connection ConectorBD() {
+        
+        
         try {
             String url = "jdbc:mysql://localhost:3306/mysql";
-            String user = "laisv";
-            String password = "lais1234";
+            String user = "laisv"; // seu usuário
+            String password = "lais1234"; // sua senha
 
+            // procura pelo driver adicionado na biblioteca, caso não tenha, siga as instruções de como adicionar pelo readme
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(url, user, password);
             criarTabelas(conn);
@@ -23,7 +26,8 @@ public class ConexaoDAO {
             return null;
         }
     }
-
+    
+    // cria o banco de dados e as tabelas
     private static void criarTabelas(Connection conn) {
         try (Statement stmt = conn.createStatement()) {
             stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS cinetrack");
@@ -61,8 +65,6 @@ public class ConexaoDAO {
                     FOREIGN KEY (filme_id) REFERENCES filmes(id) ON DELETE CASCADE
                 );
             """);
-
-            System.out.println("Tabelas verificadas/criadas com sucesso.");
 
         } catch (SQLException e) {
             System.out.println("Erro ao criar tabelas: " + e);

@@ -1,10 +1,11 @@
 package model;
 
 import java.util.ArrayList;
-
 import dao.AvaliacaoDAO;
 
+/* @author lais.v */
 public class Avaliacao {
+
     private int usuarioId;
     private int filmeId;
     private int nota; // de 1 a 10

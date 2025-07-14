@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package view;
 
 import model.*;
@@ -11,12 +7,11 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author Jao
+ * @author lais.v
  */
 public class TelaCadastroFilme extends javax.swing.JInternalFrame {
 
-    private int idFilmeEditando = 0;
     private FilmeController filmeController;
     private Filme filme;
 
@@ -61,7 +56,6 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
         tabelaFilmes = new javax.swing.JTable();
         remover_Button = new javax.swing.JButton();
         editar_Button = new javax.swing.JButton();
-        voltar_Button = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 102, 153));
         setClosable(true);
@@ -314,17 +308,6 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
             }
         });
 
-        voltar_Button.setBackground(new java.awt.Color(255, 255, 251));
-        voltar_Button.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        voltar_Button.setForeground(new java.awt.Color(0, 102, 153));
-        voltar_Button.setText("<< Voltar");
-        voltar_Button.setBorder(null);
-        voltar_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                voltar_ButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -333,12 +316,9 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(voltar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(remover_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -348,12 +328,10 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(remover_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                        .addComponent(editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(voltar_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(12, 12, 12))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editar_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(remover_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Filmes", jPanel2);
@@ -378,41 +356,56 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void remover_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remover_ButtonActionPerformed
-
+        int linha = tabelaFilmes.getSelectedRow();
+        if (linha > 0) {
+            int id = (int) tabelaFilmes.getValueAt(linha, 0);
+            filmeController.remover(id);
+            carregarTabelaFilmes();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um filme para remover.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_remover_ButtonActionPerformed
 
     private void editar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editar_ButtonActionPerformed
+        int linha = tabelaFilmes.getSelectedRow();
+        if (linha >= 0) {
+            int id = (int) tabelaFilmes.getValueAt(linha, 0);
+            String novoTitulo = tabelaFilmes.getValueAt(linha, 1).toString();
+            String novoGenero = tabelaFilmes.getValueAt(linha, 2).toString();
+            String novoDiretor = tabelaFilmes.getValueAt(linha, 3).toString();
+            int novoAno = Integer.parseInt(tabelaFilmes.getValueAt(linha, 3).toString());
 
+            filme = new Filme(novoTitulo, novoGenero, novoDiretor, novoAno);
+            filmeController.editar(id, filme);
+            carregarTabelaFilmes();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um filme para editar.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_editar_ButtonActionPerformed
 
-    private void voltar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltar_ButtonActionPerformed
-
-    }//GEN-LAST:event_voltar_ButtonActionPerformed
-
     private void salvar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvar_ButtonActionPerformed
-        FilmeController filmeController = new FilmeController();
         int ano = 0;
         if (!txtAno.getText().isBlank() || txtAno.getText().equals("[0-9]")) {
             ano = Integer.parseInt(txtAno.getText());
         }
         filme = new Filme(txtTitulo.getText(), generoComboBox.getSelectedItem().toString(), txtDiretor.getText(), ano);
         filmeController.cadastrar(filme);
+        carregarTabelaFilmes();
+        limparCampos();
     }//GEN-LAST:event_salvar_ButtonActionPerformed
     private void limparCampos() {
         txtTitulo.setText("");
         txtDiretor.setText("");
         txtAno.setText("");
-        idFilmeEditando = 0;
     }
 
     public void carregarTabelaFilmes() {
-        DefaultTableModel model = new DefaultTableModel(new Object[]{"ID", "Título", "Gênero", "Diretor", "Ano"}, 0);
-        tabelaFilmes.setModel(model);
+        DefaultTableModel model = (DefaultTableModel) tabelaFilmes.getModel();
+        model.setRowCount(0);
+        filmeController = new FilmeController();
+        ArrayList<Filme> filmeList = filmeController.listar();
 
-        FilmeController filmeController = new FilmeController();
-        ArrayList<Filme> filmes = filmeController.listar();
-
-        for (Filme f : filmes) {
+        for (Filme f : filmeList) {
             model.addRow(new Object[]{f.getId(), f.getTitulo(), f.getGenero(), f.getDiretor(), f.getAno()});
         }
     }
@@ -441,6 +434,5 @@ public class TelaCadastroFilme extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtDiretor;
     private javax.swing.JTextField txtTitulo;
     private javax.swing.JPanel username_Panel;
-    private javax.swing.JButton voltar_Button;
     // End of variables declaration//GEN-END:variables
 }

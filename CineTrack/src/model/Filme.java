@@ -1,9 +1,9 @@
 package model;
 
 import java.util.ArrayList;
-
 import dao.FilmeDAO;
 
+/* @author lais.v */
 public class Filme {
 
     private int id;

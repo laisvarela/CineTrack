@@ -5,14 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import model.Avaliacao;
 
+/* @author lais.v */
 public class AvaliacaoDAO {
+
     private Connection conn = null;
     private PreparedStatement stmt;
     private ResultSet rs;
 
+    // cadastra na tabela de avaliacoes uma nova avaliação inserindo id do usuário avaliando, 
+    // id do filme avaliado, nota inteira de 1 a 10 e comentário
     public void cadastrar(Avaliacao a) {
         String sql = "INSERT INTO avaliacoes (usuario_id, filme_id, nota, comentario) VALUES (?, ?, ?, ?)";
         try {
@@ -30,6 +33,7 @@ public class AvaliacaoDAO {
         }
     }
 
+    // edita na tabela avaliacoes a nota e o comentário, onde id de usuario e id de filme são passados por parametro
     public void editar(int usuarioId, int filmeId, Avaliacao nova) {
         String sql = "UPDATE avaliacoes SET nota = ?, comentario = ? WHERE usuario_id = ? AND filme_id = ?";
         try {
@@ -46,7 +50,8 @@ public class AvaliacaoDAO {
             fechar();
         }
     }
-
+    
+    // retorna um objeto Avaliacao da tabela avaliacoes identificado pelos valores passados por parametro
     public Avaliacao buscar(int usuarioId, int filmeId) {
         String sql = "SELECT * FROM avaliacoes WHERE usuario_id = ? AND filme_id = ?";
         try {
@@ -70,6 +75,7 @@ public class AvaliacaoDAO {
         return null;
     }
 
+    // retorna uma lista do tipo Avaliacao do usuário, cujo id é passado por parametro
     public ArrayList<Avaliacao> listarPorUsuario(int usuarioId) {
         ArrayList<Avaliacao> lista = new ArrayList<>();
         String sql = "SELECT * FROM avaliacoes WHERE usuario_id = ?";
@@ -93,6 +99,7 @@ public class AvaliacaoDAO {
         return lista;
     }
 
+    // remove da tabela avaliacoes a avaliação correspondente os valores passados por parametro
     public void remover(int usuarioId, int filmeId) {
         String sql = "DELETE FROM avaliacoes WHERE usuario_id = ? AND filme_id = ?";
         try {
@@ -108,16 +115,19 @@ public class AvaliacaoDAO {
         }
     }
 
+    // fecha conexão
     private void fechar() {
         try {
-            if (stmt != null)
+            if (stmt != null) {
                 stmt.close();
+            }
         } catch (SQLException e) {
             System.out.println("Erro ao fechar PreparedStatement: " + e);
         }
         try {
-            if (conn != null)
+            if (conn != null) {
                 conn.close();
+            }
         } catch (SQLException e) {
             System.out.println("Erro ao fechar conexão: " + e);
         }

@@ -5,15 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import model.Usuario;
 
+/* @author lais.v */
 public class UsuarioDAO {
 
     private Connection conn = null;
     private PreparedStatement stmt;
     private ResultSet rs;
 
+    // retorna um objeto Usuario da tabela usuarios se encontrar o mesmo com username e senha passado por parametro
     public Usuario login(String username, String senha) {
         String sql = "SELECT * FROM usuarios WHERE username = ? AND senha = ?";
         try {
@@ -38,7 +39,8 @@ public class UsuarioDAO {
         }
         return null;
     }
-
+    
+    // cadastra um novo usuario na tabela usuarios e retorna true caso tenha sucess e false se ocorrer erro
     public boolean cadastrar(Usuario u) {
         String sql = "INSERT INTO usuarios (nome, username, senha, perfil) VALUES (?, ?, ?, ?)";
         try {
@@ -57,7 +59,8 @@ public class UsuarioDAO {
             fechar();
         }
     }
-
+    
+    // edita na tabela usuarios os valores: nome, username e senha. Os novos valores são passados por paramentro
     public void editar(int id, Usuario u) {
         String sql = "UPDATE usuarios SET nome = ?, username = ?, senha = ?, WHERE id = ?";
         try {
@@ -75,7 +78,8 @@ public class UsuarioDAO {
             fechar();
         }
     }
-
+    
+    // função editar do ADM, edita apenas o nome e username do usuário, nesse caso, o cliente
     public void ADMEditar(int id, Usuario u) {
         String sql = "UPDATE usuarios SET nome = ?, username = ? WHERE id = ?";
         try {
@@ -93,6 +97,7 @@ public class UsuarioDAO {
         }
     }
 
+    // busca na tabela usuarios o usuario encontrado através do id e retorna o mesmo
     public Usuario buscarPorId(int id) {
         String sql = "SELECT * FROM usuarios WHERE id = ?";
         try {
@@ -116,6 +121,7 @@ public class UsuarioDAO {
         return null;
     }
 
+    // busca na tabela usuarios o usuario identificado pelo username e retorna o mesmo
     public Usuario buscarPorUsername(String username) {
         String sql = "SELECT * FROM usuarios WHERE username = ?";
         try {
@@ -139,6 +145,7 @@ public class UsuarioDAO {
         return null;
     }
 
+    // retorna uma lista com todos os usuarios da tabela usuarios
     public ArrayList<Usuario> listar() {
         ArrayList<Usuario> lista = new ArrayList<>();
         String sql = "SELECT * FROM usuarios";
@@ -162,6 +169,7 @@ public class UsuarioDAO {
         return lista;
     }
 
+    // remove o Usuario identificado pelo id passado por parametro 
     public void remover(int id) {
         String sql = "DELETE FROM usuarios WHERE id = ?";
         try {
@@ -176,6 +184,7 @@ public class UsuarioDAO {
         }
     }
 
+    // fecha as conexões 
     private void fechar() {
         try {
             if (stmt != null) {

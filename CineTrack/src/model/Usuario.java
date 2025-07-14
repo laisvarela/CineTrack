@@ -1,9 +1,9 @@
 package model;
 
 import java.util.ArrayList;
-
 import dao.UsuarioDAO;
 
+/* @author lais.v */
 public class Usuario {
 
     private int id;
@@ -100,9 +100,11 @@ public class Usuario {
     public void editar(int id, Usuario u) {
         new UsuarioDAO().editar(id, u);
     }
+
     public void ADMEditar(int id, Usuario u) {
         new UsuarioDAO().ADMEditar(id, u);
     }
+
     public Usuario buscarPorId(int id) {
         return new UsuarioDAO().buscarPorId(id);
     }

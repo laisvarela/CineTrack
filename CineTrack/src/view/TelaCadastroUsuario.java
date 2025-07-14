@@ -13,6 +13,7 @@ import model.*;
 /**
  *
  * @author Jao
+ * @author lais.v
  */
 public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 

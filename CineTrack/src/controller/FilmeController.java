@@ -1,13 +1,13 @@
 package controller;
 
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
-
 import model.Filme;
 
+/* @author lais.v */
 public class FilmeController {
 
+    // cadastra um novo filme caso os valores de Filme f sejam válidos
     public void cadastrar(Filme f) {
         if (f.getTitulo().isBlank() || f.getGenero().isBlank() || f.getDiretor().isBlank() || f.getAno() <= 0) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro",
@@ -23,13 +23,14 @@ public class FilmeController {
         } else if (f.getAno() == 0) {
             JOptionPane.showMessageDialog(null, "Digite um ano váilo.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
-            
+
         } else if (f != null) {
             new Filme().cadastrar(f);
             System.out.println("Filme cadastrado com sucesso!");
         }
     }
 
+    // edita o Filme com id correspondente ao passado por parametro, caso os valores de Filme f sejam válidos
     public void editar(int id, Filme f) {
         if (f.getTitulo().isBlank() || f.getGenero().isBlank() || f.getDiretor().isBlank() || f.getAno() <= 0) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro",
@@ -55,6 +56,7 @@ public class FilmeController {
 
     }
 
+    // retorna um Filme caso o id seja válido
     public Filme buscarPorId(int id) {
         if (id <= 0) {
             JOptionPane.showMessageDialog(null, "ID inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -73,7 +75,7 @@ public class FilmeController {
         }
 
     }
-
+    // retorna um Filme caso o título seja válido e neste sistema, não é possível cadastrar dois títulos iguais
     public Filme buscarPorTitulo(String titulo) {
         if (titulo.isBlank()) {
             JOptionPane.showMessageDialog(null, "Título não pode ser vazio.", "Erro",
@@ -93,6 +95,7 @@ public class FilmeController {
         }
     }
 
+    // retorna uma lista de filmes 
     public ArrayList<Filme> listar() {
         if (new Filme().listar().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nenhum filme cadastrado.", "Informação",
@@ -106,6 +109,7 @@ public class FilmeController {
 
     }
 
+    // remove o filme com id correspondente ao id passado por parametro, caso id seja válido
     public void remover(int id) {
         if (id <= 0) {
             JOptionPane.showMessageDialog(null, "ID inválido.", "Erro", JOptionPane.ERROR_MESSAGE);

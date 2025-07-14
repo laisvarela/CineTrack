@@ -7,6 +7,7 @@ import model.Usuario;
 /**
  *
  * @author Jao
+ * @author lais.v
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
