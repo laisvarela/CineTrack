@@ -31,14 +31,18 @@ Antes de começar, garanta que você tenha os seguintes softwares instalados:
     ```bash
     git clone [https://github.com/laisvarela/cinetrack.git](https://github.com/laisvarela/cinetrack.git)
     ```
-2.  **Configure o Banco de Dados:**
+2. **Adicione arquivo JAR:**
+   * No NetBeans, clique com botao direito na pasta biblioteca ou libraries.
+   * Clica na opção "Add JAR/FOLDER"
+   * E adicione o arquivo "mysql-connector-j-9.3.0" que está na pasta driver.
+3.  **Configure o Banco de Dados:**
     * Acesse o seu servidor MySQL.
     * Crie um novo usuário com as seguintes credenciais (ou altere o arquivo `src/dao/ConexaoDAO.java` com as suas):
         * **Usuário**: `Seu nome aqui`
         * **Senha**: `Sua senha`
     * A aplicação irá criar o banco de dados `cinetrack` e as tabelas (`usuarios`, `filmes`, `avaliacoes`) automaticamente na primeira execução.
 
-3.  **Execute a Aplicação:**
+4.  **Execute a Aplicação:**
     * Importe o projeto na sua IDE de preferência (NetBeans, Eclipse, IntelliJ, etc.).
     * Execute a classe principal `view.TelaPrincipal.java`.
 
