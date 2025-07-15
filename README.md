@@ -44,19 +44,28 @@ Antes de começar, garanta que você tenha os seguintes softwares instalados:
 
 ## 🖼️ Telas da Aplicação
 
-<p align="center">
-  <i>Images das Telas</i>
-  <br>
-  <strong>Tela Principal</strong><br>
-  <img src="./img/TelaPrincipal.png" width="400">
-  <br><br>
-  <strong>Tela de Login (Admin)</strong><br>
-  <img src="./img/TelaLoginADM.png" width="300">
-  <strong>Tela de Cadastrar Filme (Admin)</strong><br>
-  <img src="./img/TelaCadastrarFilme.png" width="300">
-  <strong>Tela de Login (Clientes)</strong><br>
-  <img src="./img/TelaLoginCliente.png" width="300">
-</p>
+<table>
+  <tr>
+    <td align="center">
+      <strong>Tela Prinicipal</strong><br>
+      <img src="./img/TelaPrincipal.png" width="400" alt="Tela de Login">
+    </td>
+    <td align="center">
+      <strong>Tela de Login (Admin)</strong><br>
+      <img src="./img/TelaLoginADM.png" width="400" alt="Tela de Admin">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>Outra Tela de Login (Cliente) </strong><br>
+      <img src="./img/TelaLoginCliente.png" width="400" alt="Tela de Avaliação de Filme">
+    </td>
+    <td align="center">
+      <strong>Outra Tela de Cadastrar Filmes (Admin)</strong><br>
+      <img src="./img/TelaCadastrarFilmes.png" width="400" alt="Tela de Relatório">
+    </td>
+  </tr>
+</table>
 
 ## 👩‍💻 Autores
 
