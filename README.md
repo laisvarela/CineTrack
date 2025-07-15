@@ -62,7 +62,7 @@ Antes de começar, garanta que você tenha os seguintes softwares instalados:
     </td>
     <td align="center">
       <strong>Outra Tela de Cadastrar Filmes (Admin)</strong><br>
-      <img src="./img/TelaCadastrarFilmes.png" width="400" alt="Tela de Relatório">
+      <img src="./img/TelaCadastraFilmes.png" width="400" alt="Tela de Relatório">
     </td>
   </tr>
 </table>
