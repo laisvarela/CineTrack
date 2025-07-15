@@ -2,7 +2,6 @@ package view;
 
 import controller.AvaliacaoController;
 import controller.FilmeController;
-import controller.UsuarioController;
 import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JOptionPane;

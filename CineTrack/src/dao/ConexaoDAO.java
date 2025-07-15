@@ -8,8 +8,7 @@ import java.sql.Statement;
 public class ConexaoDAO {
 
     public static Connection ConectorBD() {
-        
-        
+       
         try {
             String url = "jdbc:mysql://localhost:3306/mysql";
             String user = "laisv"; // seu usuário
