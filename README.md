@@ -51,11 +51,11 @@ Antes de começar, garanta que você tenha os seguintes softwares instalados:
   <img src="./img/TelaPrincipal.png" width="400">
   <br><br>
   <strong>Tela de Login (Admin)</strong><br>
-  <img src="./img/TelaLoginADM.png" width="600">
+  <img src="./img/TelaLoginADM.png" width="300">
   <strong>Tela de Cadastrar Filme (Admin)</strong><br>
-  <img src="./img/TelaCadastrarFilme.png" width="600">
+  <img src="./img/TelaCadastrarFilme.png" width="300">
   <strong>Tela de Login (Clientes)</strong><br>
-  <img src="./img/TelaLoginCliente.png" width="600">
+  <img src="./img/TelaLoginCliente.png" width="300">
 </p>
 
 ## 👩‍💻 Autores
