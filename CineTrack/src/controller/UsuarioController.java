@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import view.TelaLogin;
+import java.awt.Component;
 
 /* @author lais.v */
 public class UsuarioController {
@@ -47,7 +48,7 @@ public class UsuarioController {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
             return false;
-        } else if (!senhaConfirmar.equals(u.getSenha())) {
+        } else if (!String.valueOf(senhaConfirmar).equals(u.getSenha())) {
             JOptionPane.showMessageDialog(null, "As senhas não iguais.", "Atenção",
                     JOptionPane.WARNING_MESSAGE);
             return false;
@@ -75,7 +76,7 @@ public class UsuarioController {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro",
                     JOptionPane.ERROR_MESSAGE);
         } else if (u.getSenha().length() < 4) {
-            JOptionPane.showMessageDialog(null, "A senha deve ter pelo menos 4 caracteres.", "Atenção",
+            JOptionPane.showMessageDialog(null,"A senha deve ter pelo menos 4 caracteres.", "Atenção",
                     JOptionPane.WARNING_MESSAGE);
         } else if (new Usuario().buscarPorUsername(u.getUsername()) != null
                 && new Usuario().buscarPorUsername(u.getUsername()).getId() != id) {

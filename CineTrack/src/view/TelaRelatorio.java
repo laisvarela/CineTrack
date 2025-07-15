@@ -5,6 +5,9 @@
 package view;
 
 import controller.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import model.Filme;
 
 /**
  *
@@ -19,20 +22,24 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
         initComponents();
 
         FilmeController filmeController = new FilmeController();
+        ArrayList<Filme> listaDeFilmes = filmeController.listar();
 
-        java.util.ArrayList<model.Filme> listaDeFilmes = filmeController.listar();
-        StringBuilder relatorio = new StringBuilder();
-        relatorio.append("--- RELATÓRIO DE FILMES CADASTRADOS ---\n\n");
-
-        for (model.Filme filme : listaDeFilmes) {
-            relatorio.append("ID: ").append(filme.getId()).append("\n");
-            relatorio.append("Título: ").append(filme.getTitulo()).append("\n");
-            relatorio.append("Gênero: ").append(filme.getGenero()).append("\n");
-            relatorio.append("Diretor: ").append(filme.getDiretor()).append("\n");
-            relatorio.append("Ano: ").append(filme.getAno()).append("\n");
-            relatorio.append("----------------------------------------\n");
-        }
-        txtAreaRelatorio.setText(relatorio.toString());
+        if(listaDeFilmes.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Nenhum filme cadastrado para exibir no relatório.", "Relatório Vaio",JOptionPane.INFORMATION_MESSAGE);
+        } else{
+            StringBuilder relatorio = new StringBuilder();
+            relatorio.append("--- RELATÓRIO DE FILMES CADASTRADOS ---\n\n");
+            
+            for(Filme filme: listaDeFilmes){
+                relatorio.append("ID: ").append(filme.getId()).append("\n");
+                relatorio.append("Título: ").append(filme.getTitulo()).append("\n");
+                relatorio.append("Gênero: ").append(filme.getGenero()).append("\n");
+                relatorio.append("Diretor: ").append(filme.getDiretor()).append("\n");
+                relatorio.append("Ano: ").append(filme.getAno()).append("\n");
+                relatorio.append("--------------------------------------------\n");
+            }
+            txtAreaRelatorio.setText(relatorio.toString());
+        }    
     }
 
     /**
@@ -53,8 +60,14 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
         setTitle("Relatório");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/filme.png"))); // NOI18N
 
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        txtAreaRelatorio.setEditable(false);
+        txtAreaRelatorio.setBackground(new java.awt.Color(255, 255, 255));
         txtAreaRelatorio.setColumns(20);
+        txtAreaRelatorio.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         txtAreaRelatorio.setRows(5);
+        txtAreaRelatorio.setMargin(new java.awt.Insets(10, 10, 10, 10));
         jScrollPane1.setViewportView(txtAreaRelatorio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

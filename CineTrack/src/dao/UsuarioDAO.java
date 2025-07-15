@@ -62,7 +62,7 @@ public class UsuarioDAO {
     
     // edita na tabela usuarios os valores: nome, username e senha. Os novos valores são passados por paramentro
     public void editar(int id, Usuario u) {
-        String sql = "UPDATE usuarios SET nome = ?, username = ?, senha = ?, WHERE id = ?";
+        String sql = "UPDATE usuarios SET nome = ?, username = ?, senha = ? WHERE id = ?";
         try {
             conn = ConexaoDAO.ConectorBD();
             stmt = conn.prepareStatement(sql);

@@ -13,12 +13,13 @@ import model.*;
  */
 public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 
-    private TelaPrincipal main;
+    private final TelaPrincipal main;
     private UsuarioController usuarioController;
     private Usuario usuario;
 
     /**
      * Creates new form TelaCadastroUsuário
+     * @param main
      */
     public TelaCadastroUsuario(TelaPrincipal main) {
         initComponents();
@@ -289,7 +290,7 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
         if (cadastrado) {
             Usuario userLogado = null;
 
-            if (TelaLogin.idLogado >= 0) {
+            if (TelaLogin.idLogado > 0) {
                 userLogado = usuarioController.buscarPorId(TelaLogin.idLogado);
             }
 

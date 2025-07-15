@@ -10,7 +10,7 @@ import model.Usuario;
  */
 public class TelaLogin extends javax.swing.JInternalFrame {
 
-    public static int idLogado;
+    public static int idLogado = -1;
     public static String perfi;
     private TelaPrincipal main;
 
